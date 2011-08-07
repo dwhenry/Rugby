@@ -13,7 +13,7 @@ Then /^I should be logged in as "([^"]*)"$/ do |arg1|
 end
 
 Given /^I have a user account for "([^"]*)"$/ do |arg1|
-  User.create(:login => user_name, :email => "#{login}@test.com"
+  User.create(:login => user_name, :email => "#{login}@test.com")
 end
 
 When /^I login as "([^"]*)"$/ do |arg1|

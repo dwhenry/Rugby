@@ -1,6 +1,13 @@
 Rugby::Application.routes.draw do
   get "welcome/index"
 
+  resources :users
+  namespace :user_session do
+    get :login
+    post :login
+    get :logout
+    post :logout
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

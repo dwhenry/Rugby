@@ -11,14 +11,13 @@ gem "haml"
 gem "sass"
 gem "haml-rails" 
 
-group :test do
+group :test, :development do
   gem "rspec"
-  gem "test-unit"
-  gem "rspec-rails", '>= 2.0.0.beta.10'
+  gem "test-unit", '1.2.3'
+  gem "rspec-rails", '>= 2.0.0.beta.17'
   gem "factory_girl"
   gem 'cucumber-rails'
   gem 'capybara'
-  gem 'webrat', '0.4.5'
   gem 'database_cleaner', '0.5.2'
   gem 'selenium-client', '1.2.18'
   gem 'selenium-rc', '2.2.4'
