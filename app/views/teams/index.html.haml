@@ -1,0 +1,12 @@
+.header
+  WHO DO YOU SUPPORT
+
+- @teams.group_by(&:pool).each do |pool, teams|
+  .column
+    .title
+      = "Pool: #{pool}"
+    - teams.each do |team|
+      .team{:style => 'vertical-align: top', :class => (team == current_user.team ? 'selected' : nil)}
+        = team.name
+        %br
+        = image_tag "flags/#{team.name}.png"

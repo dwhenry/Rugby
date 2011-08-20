@@ -1,0 +1,11 @@
+.header
+  Edit league
+
+= form_for @league do |f|
+  = render :partial => "form", :object => f
+
+  .input_row
+    .submit
+      = f.submit 'Create'
+      = link_to 'Show', @league
+      = link_to 'Back', leagues_path

@@ -1,0 +1,8 @@
+.header
+  Create a new user account
+
+= form_for @user, :url => account_path do |f|
+  = render :partial => "form", :object => f
+  .input_row
+    .submit
+      = f.submit 'Register'

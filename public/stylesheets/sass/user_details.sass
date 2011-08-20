@@ -1,18 +1,54 @@
-#user
-  text-align: right
-  float: right
-
 .page
+  position: relative
   margin: 20px auto
-  padding: 20px 0
-  padding: 10px
+  padding: 10px 200px
   border: solid #DDD 3px
-  width: 1000px
+  width: 600px
   min-height: 500px
   -moz-border-radius: 10px
   -webkit-border-radius: 10px
 
+  #title
+    text-align: center
+    font-size: 24px
+
+  #user
+    text-align: right
+    position: absolute
+    right: 20px
+
   .header
+    padding: 10px 0
     text-align: center
     font-size: 20px
+    margin: 0 -10px
+    border-bottom: solid 2px #EEE
 
+  .column
+    width: 150px
+    float: left
+
+    &:first-child
+      margin-left: -10px
+
+    &:last-child
+      margin-right: -10px
+
+    .title
+      font-size: 18px
+      text-align: center
+      padding: 5px 0
+
+.team
+  text-align: center
+  margin: 0 10px
+
+  img
+    width: 100px
+    height: 55px
+    border: 1px solid #666
+
+  &.selected
+    border: #F00 solid 1px
+    background-color: #F99
+    margin: -1px 10px

@@ -1,13 +1,16 @@
 Rugby::Application.routes.draw do
+  resources :leagues
+  resources :league_members, :only => [:create, :destroy]
+
+  get "main/index"
+
   get "welcome/index"
 
+  resource :account, :controller => 'users'
   resources :users
-  namespace :user_session do
-    get :login
-    post :login
-    get :logout
-    post :logout
-  end
+  resources :teams
+  resource :user_session
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

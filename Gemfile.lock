@@ -28,6 +28,7 @@ GEM
       activemodel (= 3.0.9)
       activesupport (= 3.0.9)
     activesupport (3.0.9)
+    addressable (2.2.6)
     archive-tar-minitar (0.5.2)
     arel (2.0.10)
     authlogic (3.0.3)
@@ -76,6 +77,8 @@ GEM
     i18n (0.5.0)
     json (1.5.1)
     json_pure (1.5.1)
+    launchy (2.0.5)
+      addressable (~> 2.2.6)
     linecache19 (0.5.12)
       ruby_core_source (>= 0.1.4)
     mail (2.2.19)
@@ -163,6 +166,7 @@ DEPENDENCIES
   factory_girl
   haml
   haml-rails
+  launchy
   rails (= 3.0.9)
   rspec
   rspec-rails (>= 2.0.0.beta.17)

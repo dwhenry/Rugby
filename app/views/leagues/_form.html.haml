@@ -1,0 +1,32 @@
+-if @league.errors.any?
+  #error_explanation
+    %h2= "#{pluralize(@league.errors.count, "error")} prohibited this league from being saved:"
+    %ul
+      - @league.errors.full_messages.each do |msg|
+        %li= msg
+
+.input_row
+  .field
+    = form.label :name, 'League'
+  .value
+    = form.text_field :name
+
+.input_row
+  .field
+    = form.label :password
+  .value
+    = form.text_field :password
+    *
+
+.input_row
+  .field
+    = form.label :password_confirmation, 'Password Confirmation'
+  .value
+    = form.text_field :password_confirmation
+    *
+
+.input_row
+  .field
+    &nbsp;
+  .value
+    * Optional

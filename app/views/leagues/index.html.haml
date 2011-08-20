@@ -1,0 +1,24 @@
+.header
+  Leagues
+
+.all_leagues
+  .league.header_row
+    .name
+      Name
+
+    .size
+      Members
+
+    .password
+      Password
+
+  - @leagues.each do |league|
+    .league
+      .name
+        = "#{league.name} (#{join_leave(league)})".html_safe
+
+      .size
+        = league.users.size
+
+      .password
+        No

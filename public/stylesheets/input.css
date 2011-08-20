@@ -1,0 +1,13 @@
+.page .input_row, .page .display_row {
+  overflow: hidden;
+  padding: 10px 0; }
+  .page .input_row .field, .page .display_row .field {
+    float: left;
+    width: 200px;
+    padding-left: 20px;
+    color: #555555; }
+  .page .input_row .value, .page .display_row .value {
+    float: left;
+    width: 300px; }
+  .page .input_row .submit, .page .input_row .button, .page .display_row .submit, .page .display_row .button {
+    padding-left: 100px; }

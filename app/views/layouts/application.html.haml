@@ -6,8 +6,49 @@
     = stylesheet_link_tag :all
     = javascript_include_tag :defaults
     = csrf_meta_tag
-    = stylesheet_link_tag 'user_details'
+    = stylesheet_link_tag 'user_details', 'input'
   %body
     .page
       = render :partial => 'layouts/user_details'
       = yield
+
+      - if @current_user
+        #left_menu
+          .row
+            - team = current_user.team
+            .element
+              MY TEAM
+            .element
+              = team.name
+            .element
+              = image_tag "flags/#{team.name}.png"
+            - team.fixtures.each do |fixture|
+              .element
+                = "v #{fixture.opponent_to(team).name}"
+          .row
+            = link_to 'All Teams', teams_path
+
+
+        #right_menu
+          .row
+            = link_to 'Home', main_index_path
+
+          .row.league
+            .element
+              MY LEAGUES
+            - @current_user.leagues.each do |league|
+              .element
+                = "* #{league.name}"
+            .element
+              = link_to 'Create League', new_league_path
+            .element
+              = link_to 'All Leagues', leagues_path
+
+%script{:type=>"text/javascript"} 
+  Event.observe(window, 'load', function() {
+  if($('right_menu')){
+  height = $$('.page').first().getHeight() - 47;
+  $('right_menu').setStyle({'height': height + 'px'});
+  $('left_menu').setStyle({'height': height + 'px'});
+  };
+  });

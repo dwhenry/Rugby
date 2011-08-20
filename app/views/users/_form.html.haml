@@ -1,0 +1,27 @@
+.input_row
+  = form.error_messages
+.input_row
+  .field
+    = form.label :login
+  .value
+    = form.text_field :login
+.input_row
+  .field
+    = form.label :email, 'E-Mail'
+  .value
+    = form.text_field :email
+.input_row
+  .field
+    = form.label :team_id, 'My Team'
+  .value
+    = form.select :team_id, Team.all.map{|t| [t.name, t.id]}
+.input_row
+  .field
+    = form.label :password, form.object.new_record? ? nil : "Change password"
+  .value
+    = form.password_field :password
+.input_row
+  .field
+    = form.label :password_confirmation, 'Password Confirmation'
+  .value
+    = form.password_field :password_confirmation

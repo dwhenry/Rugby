@@ -1,0 +1,48 @@
+=menu_setup
+  width: 170px
+  position: absolute
+  top: 67px
+  background: #EEE
+
+  .row
+    padding: 10px 20px
+    border-bottom: solid 1px #DDD
+
+#right_menu
+  +menu_setup
+  right: 0
+  -moz-border-radius: 0 0 7px 0
+  -webkit-border-radius: 0 0 7px 0
+
+#left_menu
+  +menu_setup
+  left: 0
+  -moz-border-radius: 0 0 0 7px
+  -webkit-border-radius: 0 0 0 7px
+
+  img
+    width: 100px
+    hieght: 55px
+
+.all_leagues
+
+  .league
+    overflow: hidden
+    width: 500px
+    margin: auto
+    border-bottom: solid 1px #DDD
+    padding: 10px 20px
+
+    .name
+      float: left
+      width: 300px
+
+    .size
+      text-align: center
+      float: left
+      width: 100px
+
+    .password
+      text-align: center
+      float: left
+      width: 100px

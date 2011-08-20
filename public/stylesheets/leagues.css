@@ -1,0 +1,44 @@
+#right_menu {
+  width: 170px;
+  position: absolute;
+  top: 67px;
+  background: #eeeeee;
+  right: 0;
+  -moz-border-radius: 0 0 7px 0;
+  -webkit-border-radius: 0 0 7px 0; }
+  #right_menu .row {
+    padding: 10px 20px;
+    border-bottom: solid 1px #dddddd; }
+
+#left_menu {
+  width: 170px;
+  position: absolute;
+  top: 67px;
+  background: #eeeeee;
+  left: 0;
+  -moz-border-radius: 0 0 0 7px;
+  -webkit-border-radius: 0 0 0 7px; }
+  #left_menu .row {
+    padding: 10px 20px;
+    border-bottom: solid 1px #dddddd; }
+  #left_menu img {
+    width: 100px;
+    hieght: 55px; }
+
+.all_leagues .league {
+  overflow: hidden;
+  width: 500px;
+  margin: auto;
+  border-bottom: solid 1px #dddddd;
+  padding: 10px 20px; }
+  .all_leagues .league .name {
+    float: left;
+    width: 300px; }
+  .all_leagues .league .size {
+    text-align: center;
+    float: left;
+    width: 100px; }
+  .all_leagues .league .password {
+    text-align: center;
+    float: left;
+    width: 100px; }
