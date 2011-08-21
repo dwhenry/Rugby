@@ -1,6 +1,20 @@
-%p#notice= notice
+.header
+  League:
+  = @league.name
 
+.display_row.row_header
+  .position
+    Position
+  .points
+    Points
+  .name
+    Name
+- @league.users_by_position.each_with_index do |user, i|
+  .display_row
+    .position
+      = i + 1
+    .points
+      = user.points
+    .name
+      = user.login
 
-= link_to 'Edit', edit_league_path(@league)
-\|
-= link_to 'Back', leagues_path

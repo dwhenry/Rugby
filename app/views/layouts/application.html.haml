@@ -13,38 +13,8 @@
       = yield
 
       - if @current_user
-        #left_menu
-          .row
-            - team = current_user.team
-            .element
-              MY TEAM
-            .element
-              = team.name
-            .element
-              = image_tag "flags/#{team.name}.png"
-            - team.fixtures.each do |fixture|
-              .element
-                = "v #{fixture.opponent_to(team).name}"
-          .row
-            = link_to 'All Teams', teams_path
-          .row
-            = link_to 'Fixtures', fixtures_path
-
-
-        #right_menu
-          .row
-            = link_to 'Home', main_index_path
-
-          .row.league
-            .element
-              MY LEAGUES
-            - @current_user.leagues.each do |league|
-              .element
-                = "* #{league.name}"
-            .element
-              = link_to 'Create League', new_league_path
-            .element
-              = link_to 'All Leagues', leagues_path
+        = render :partial => 'layouts/left_menu'
+        = render :partial => 'layouts/right_menu'
 
 %script{:type=>"text/javascript"} 
   Event.observe(window, 'load', function() {

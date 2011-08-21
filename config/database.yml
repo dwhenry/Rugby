@@ -10,6 +10,7 @@ development:
 test: &test
   adapter: postgresql
   database: rugby_test
+  min_messages: WARNING
 
 production:
   adapter: postgresql

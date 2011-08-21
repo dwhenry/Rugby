@@ -16,7 +16,7 @@ describe TeamsController do
     it "assigns all teams as @teams" do
       team = Team.create! valid_attributes
       get :index
-      assigns(:teams).should eq([team])
+      assigns(:teams).should eq({'A' => [team]})
     end
   end
 end

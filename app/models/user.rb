@@ -6,4 +6,12 @@ class User < ActiveRecord::Base
   has_many :league_members
   has_many :leagues, :through => :league_members
   belongs_to :team
+
+  def points
+    0
+  end
+
+  def current_picks
+    []
+  end
 end

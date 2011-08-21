@@ -5,6 +5,10 @@ class League < ActiveRecord::Base
 
   validates_presence_of :name
   validate :confirm_password
+  
+  def users_by_position
+    users.sort(&:points)
+  end
 
   def add_user(user)
     self.league_members.create(:user => user)
@@ -14,5 +18,13 @@ class League < ActiveRecord::Base
     if password && changed.include?('password')
       errors.add :password, 'does not match' if password != @password_confirmation
     end
+  end
+
+  def position_for(user)
+    index = users.index(user) || -1
+    while (index > 0 && users[index-1].points == users[index].points)
+      index -= 1
+    end
+    "#{index + 1} (#{users.size})"
   end
 end

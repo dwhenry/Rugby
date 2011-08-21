@@ -1,0 +1,21 @@
+#right_menu
+  .row
+    = link_to 'Home', main_index_path
+
+  .row.league
+    .element
+      MY LEAGUES
+    - current_user.leagues.each do |league|
+      .element
+        = "* #{link_to(league.name, league_path(league))} #{league.position_for(current_user)}".html_safe
+    .element
+      = link_to 'Create League', new_league_path
+    .element
+      = link_to 'All Leagues', leagues_path
+  .row
+    .element
+      = "Points: #{current_user.points}"
+    .elements
+      - current_user.current_picks.each do |pick|
+        = pick.match
+
