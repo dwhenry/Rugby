@@ -8,7 +8,8 @@ Rugby::Application.routes.draw do
 
   resource :account, :controller => 'users'
   resources :users
-  resources :teams
+  resources :teams, :only => :index
+  resources :fixtures, :only => :index
   resource :user_session
 
   # The priority is based upon order of creation:

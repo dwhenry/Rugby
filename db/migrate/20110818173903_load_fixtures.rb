@@ -3,19 +3,19 @@ class LoadFixtures < ActiveRecord::Migration
     data = File.read('db/fixtures.csv').split("\n").map{|r| r.gsub(/\"/,'').split(',')}[1..-1]
 
     data[0..39].each do |row|
-      Fixture.create(:kick_off => row[1],
+      fix = Fixture.create(:kick_off => row[1],
                      :home_team => get_team(row[3], :home, row[2]),
                      :away_team => get_team(row[3], :away, row[2]),
                      :location => "#{row[4]}, #{row[5]}",
                      :name => row[3],
-                     :description => row[6])
+                     :description => row[6] || row[3])
     end
 
     data[40..-1].each do |row|
       Fixture.create(:kick_off => row[1],
                      :location => "#{row[4]}, #{row[5]}",
                      :name => row[3],
-                     :description => row[6])
+                     :description => row[6] || row[3])
     end
   end
 

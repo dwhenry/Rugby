@@ -11,4 +11,9 @@ class Fixture < ActiveRecord::Base
     return home_team unless home_team == team
     away_team
   end
+
+  def match
+    return name if name == description
+    "#{name} (#{description})"
+  end
 end

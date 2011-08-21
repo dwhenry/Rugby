@@ -47,8 +47,6 @@ ActiveRecord::Schema.define(:version => 20110818173903) do
 
   create_table "users", :force => true do |t|
     t.integer  "team_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "login",                                  :null => false
     t.string   "email",                                  :null => false
     t.string   "crypted_password",                       :null => false
@@ -64,6 +62,8 @@ ActiveRecord::Schema.define(:version => 20110818173903) do
     t.string   "current_login_ip"
     t.string   "last_login_ip"
     t.boolean  "admin",               :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

@@ -1,0 +1,24 @@
+.header
+  WHO DO YOU SUPPORT
+
+.fixture_row.row_header
+  .name
+    Match
+  .pool
+    &nbsp;
+  .time
+    Time
+  .location
+    Location
+
+- @fixtures.each do |fixture|
+  .fixture_row
+    .name
+      = fixture.match
+    .pool
+      = fixture.home_team.try(:pool) || '-'
+    .time
+      = fixture.kick_off
+    .location
+      = fixture.location
+

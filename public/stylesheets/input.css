@@ -11,3 +11,23 @@
     width: 300px; }
   .page .input_row .submit, .page .input_row .button, .page .display_row .submit, .page .display_row .button {
     padding-left: 100px; }
+.page .fixture_row {
+  overflow: hidden;
+  padding: 5px 0; }
+  .page .fixture_row.row_header {
+    font-size: 18px;
+    border-bottom: solid 1px #aaaaaa; }
+  .page .fixture_row .name {
+    float: left;
+    width: 225px; }
+  .page .fixture_row .pool {
+    float: left;
+    width: 25px;
+    text-align: center; }
+  .page .fixture_row .time {
+    float: left;
+    width: 75px;
+    text-align: center; }
+  .page .fixture_row .location {
+    float: left;
+    width: 275px; }
