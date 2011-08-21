@@ -1,5 +1,5 @@
 #right_menu {
-  width: 170px;
+  width: 250px;
   position: absolute;
   top: 67px;
   background: #eeeeee;
@@ -11,7 +11,7 @@
     border-bottom: solid 1px #dddddd; }
 
 #left_menu {
-  width: 170px;
+  width: 250px;
   position: absolute;
   top: 67px;
   background: #eeeeee;
