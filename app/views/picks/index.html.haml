@@ -17,13 +17,13 @@
     = fields_for "picks[]", pick do |p|
       = p.hidden_field :match_id
       .pick_row
-        .name
+        .name{:title => pick.match.full_name}
           - if pick.can_set?
             = p.label :home_team, 'Home', :style => 'display: none;'
-            = p.text_field :home_team, :class => 'home_team'
+            = p.text_field :home_team, {:class => 'home_team', :onchange => 'clear_other(this)'}
             = pick.match.match
             = p.label :away_team, 'Away', :style => 'display: none;'
-            = p.text_field :away_team, :class => 'away_team'
+            = p.text_field :away_team, {:class => 'away_team', :onchange => 'clear_other(this)'}
           - else
             = pick.match.match
         .pool

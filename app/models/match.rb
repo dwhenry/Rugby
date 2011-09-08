@@ -18,6 +18,11 @@ class Match < ActiveRecord::Base
     name
   end
 
+  def full_name
+    return "#{home_team.try(:name)} v #{away_team.try(:name)}" if name == description
+    name
+  end
+
   def town
     location.split(',').first
   end
