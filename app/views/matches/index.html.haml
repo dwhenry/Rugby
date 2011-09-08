@@ -19,7 +19,7 @@
       = match.home_team.try(:pool) || '-'
     .time
       = "#{match.kick_off.to_s.gsub(/\./,':')}0"
-      = match.match_date.try(:strftime, '%d-%b-%Y')
+      = match.match_date.to_date.strftime('%d-%b-%Y')
     .location{:title => match.location}
       = match.town
 
