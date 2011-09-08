@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   end
 
   def add_to_all_user_league
-    League.first(:conditios => {:name => 'All Users'}).add_user(self, nil)
+    League.first(:conditions => {:name => 'All Users'}).add_user(self, nil)
   end
 
   def get_picks
