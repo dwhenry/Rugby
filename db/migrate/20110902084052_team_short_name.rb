@@ -1,7 +1,8 @@
 class TeamShortName < ActiveRecord::Migration
   def self.up
     add_column :teams, :short_name, :string
-    
+    Team.reset_column_information    
+
     names = {"Argentina" => 'ARG',
              "Australia" => 'AUS',
              "Canada" => 'CAN',
