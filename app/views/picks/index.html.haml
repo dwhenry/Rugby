@@ -1,20 +1,18 @@
 .header
   Picked a Winner?
 
-.pick_row.row_header
-  .name
-    Match
-  .pool
-    &nbsp;
-  .time
-    Time
-  .pick
-    (Average Pick)
-
 = form_for Pick.new do |f|
-  .input_row
-    .submit
+  .pick_row.row_header
+    .name
+      Match
       = f.submit 'Update'
+    .pool
+      &nbsp;
+    .time
+      Time
+    .pick
+      (Average Pick)
+
   - @picks.each do |pick|
     = fields_for "picks[]", pick do |p|
       = p.hidden_field :match_id

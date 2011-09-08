@@ -44,10 +44,10 @@ a:hover {
   padding: 5px 0; }
   .page .match_row .name, .page .pick_row .name {
     float: left;
-    width: 200px;
+    width: 175px;
     text-align: center; }
-    .page .match_row .name input, .page .pick_row .name input {
-      width: 20px; }
+    .page .match_row .name input[type=text], .page .pick_row .name input[type=text] {
+      width: 30px; }
   .page .match_row .pool, .page .pick_row .pool {
     float: left;
     width: 50px;
@@ -58,4 +58,4 @@ a:hover {
     text-align: center; }
   .page .match_row .location, .page .match_row .pick, .page .pick_row .location, .page .pick_row .pick {
     float: left;
-    width: 175px; }
+    width: 200px; }
