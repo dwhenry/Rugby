@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110908065156) do
+ActiveRecord::Schema.define(:version => 20110908124130) do
 
   create_table "league_members", :force => true do |t|
     t.integer  "user_id"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(:version => 20110908065156) do
     t.boolean  "admin",               :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
   end
 
 end

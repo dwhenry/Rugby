@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
   belongs_to :team
   after_create :add_to_all_user_league
 
+  validates_presence_of :login
+  validates_presence_of :name
+
   def points
     0
   end

@@ -9,12 +9,16 @@
     Points
   .name
     Name
+- pos, points, next_points = 0, -1, 0
 - @league.users_by_position.each_with_index do |user, i|
+  - next_points += 1
+  - pos += next_points unless user.points == points
+  - points = user.points
   .display_row
     .position
-      = i + 1
+      = pos
     .points
       = user.points
     .name
-      = user.login
+      = user.name
 
