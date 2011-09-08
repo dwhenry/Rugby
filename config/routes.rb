@@ -11,6 +11,7 @@ Rugby::Application.routes.draw do
   resources :teams, :only => :index
   resources :matches, :only => :index
   resources :picks, :only => [:create, :index]
+  resources :results, :only => [:create, :index]
   resource :user_session
 
   # The priority is based upon order of creation:

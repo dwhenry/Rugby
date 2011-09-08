@@ -6,7 +6,8 @@ class LeagueMembersController < ApplicationController
     if @league_member.save
       redirect_to league_path(@league_member.league_id)
     else
-      @leagues = League.all
+      @leagues = League.all(:conditions => "name != 'All Users'")
+      @all_league = League.first(:conditions => "name = 'All Users'")
       render :template => "leagues/index"
     end
   end

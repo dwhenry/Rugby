@@ -2,6 +2,10 @@ Given /^Match for tomorrow$/ do
   MatchCreator.for_date(Date.today.advance(:days => 1))
 end
 
+Given /^Match for yesterday$/ do
+  MatchCreator.for_date(Date.today.advance(:days => -1))
+end
+
 When /^I select a goal difference of Home by "([^"]*)"$/ do |points|
   click_on 'Picks'
   match = Match.last

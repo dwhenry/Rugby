@@ -1,6 +1,7 @@
 Feature: Create and Join League
   Background: 
     Given A logged in user "David"
+    And a league called "All Users"
 
   Scenario: create a new league
     When I create a new league called "Default"
@@ -23,6 +24,7 @@ Feature: Create and Join League
     When I click leagues
     Then I should see leagues:
       | Name           | Members | Password |
+      | All Users             |       0 |       No |
       | Default (join) |       0 |       No |
     When I join league "Default"
     Then I should have leagues:
@@ -36,6 +38,7 @@ Feature: Create and Join League
     When I click leagues
     Then I should see leagues:
       | Name                  | Members | Password |
+      | All Users             |       0 |       No |
       | PasswordLeague (join) |       0 |      Yes |
     When I join league "PasswordLeague" with password ""
     Then I should have leagues:
@@ -49,6 +52,7 @@ Feature: Create and Join League
     When I click leagues
     Then I should see leagues:
       | Name                  | Members | Password |
+      | All Users             |       0 |       No |
       | PasswordLeague (join) |       0 |      Yes |
     When I join league "PasswordLeague" with password "password"
     Then I should have leagues:

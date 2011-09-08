@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   end
 
   def add_to_all_user_league
-    League.first(:conditions => {:name => 'All Users'}).add_user(self, nil)
+    League.first(:conditions => {:name => 'All Users'}).try(:add_user, self, nil)
   end
 
   def get_picks
@@ -34,11 +34,11 @@ class User < ActiveRecord::Base
   def add_picks(added_picks)
     added_picks.map do |added_pick|
       pick = picks.detect{|p| p.match_id == added_pick[:match_id].to_i} ||
-        Pick.new(:match_id => added_pick[:match_id], :user => self)
+        pick.new(:match_id => added_pick[:match_id], :user => self)
       pick.home_team = added_pick[:home_team]
       pick.away_team = added_pick[:away_team]
       pick.save if pick.can_set?
-      return_pick = Pick.new(:match_id => added_pick[:match_id], :user => self,
+      return_pick = pick.new(:match_id => added_pick[:match_id], :user => self,
                :pick => pick.pick)
       return_pick.error_messages = pick.errors.full_messages
       return_pick

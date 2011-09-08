@@ -39,23 +39,23 @@ a:hover {
   font-size: 18px;
   border-bottom: solid 1px #aaaaaa;
   color: #777777; }
-.page .match_row, .page .pick_row {
+.page .match_row, .page .pick_row, .page .result_row {
   overflow: hidden;
   padding: 5px 0; }
-  .page .match_row .name, .page .pick_row .name {
+  .page .match_row .name, .page .pick_row .name, .page .result_row .name {
     float: left;
     width: 175px;
     text-align: center; }
-    .page .match_row .name input[type=text], .page .pick_row .name input[type=text] {
+    .page .match_row .name input[type=text], .page .pick_row .name input[type=text], .page .result_row .name input[type=text] {
       width: 30px; }
-  .page .match_row .pool, .page .pick_row .pool {
+  .page .match_row .pool, .page .pick_row .pool, .page .result_row .pool {
     float: left;
     width: 50px;
     text-align: center; }
-  .page .match_row .time, .page .pick_row .time {
+  .page .match_row .time, .page .pick_row .time, .page .result_row .time {
     float: left;
     width: 175px;
     text-align: center; }
-  .page .match_row .location, .page .match_row .pick, .page .pick_row .location, .page .pick_row .pick {
+  .page .match_row .location, .page .match_row .pick, .page .pick_row .location, .page .pick_row .pick, .page .result_row .location, .page .result_row .pick {
     float: left;
     width: 200px; }
