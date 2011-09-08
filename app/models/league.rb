@@ -20,7 +20,7 @@ class League < ActiveRecord::Base
   end
 
   def users_by_position
-    users.sort(&:points)
+    users.sort_by(&:points)
   end
 
   def add_user(user, password)
