@@ -4,7 +4,8 @@ class LeaguesController < ApplicationController
   # GET /leagues
   # GET /leagues.xml
   def index
-    @leagues = League.all
+    @leagues = League.all(:conditions => "name != 'All Users'")
+    @all_league = League.first(:conditions => "name = 'All Users'")
 
     respond_to do |format|
       format.html # index.html.erb

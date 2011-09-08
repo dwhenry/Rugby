@@ -7,9 +7,14 @@ class User < ActiveRecord::Base
   has_many :leagues, :through => :league_members
   has_many :picks
   belongs_to :team
+  after_create :add_to_all_user_league
 
   def points
     0
+  end
+
+  def add_to_all_user_league
+    League.first(:conditios => {:name => 'All Users'}).add_user(self, nil)
   end
 
   def get_picks

@@ -2,7 +2,7 @@
   Leagues
 
 .all_leagues
-  .league.header_row
+  .league.row_header
     .name
       Name
 
@@ -11,6 +11,16 @@
 
     .password
       Password
+
+  .league
+    .name
+      = @all_league.name
+
+    .size
+      = @all_league.users.size
+
+    .password
+      No
 
   - @leagues.each do |league|
     .league
