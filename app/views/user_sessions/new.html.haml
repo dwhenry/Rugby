@@ -1,26 +1,34 @@
 .header
   Login
 
-= form_for @user_session, :url => user_session_path do |f|
-  .input_row
-    = f.error_messages
-  .input_row
-    .field
-      = f.label :login
-    .value
-      = f.text_field :login
-  .input_row
-    .field
-      = f.label :password
-    .value
-      = f.password_field :password
-  .input_row
-    .field
-      = f.label :remember_me
-    .value
-      = f.check_box :remember_me
-  .input_row
-    .submit
-      = f.submit "Login"
-      |
-      = link_to 'Registor', new_user_path
+.instruct_wrapper
+  .instruct_column{:style => 'background: #DDD;'}
+    .input_row.row_header
+      Instructions
+    = render :partial => 'main/instructions'
+
+  .instruct_column
+    = form_for @user_session, :url => user_session_path do |f|
+      .input_row
+        = f.error_messages
+      .input_row
+        .field
+          = f.label :login
+        .value
+          = f.text_field :login
+      .input_row
+        .field
+          = f.label :password
+        .value
+          = f.password_field :password
+      .input_row
+        .field
+          = f.label :remember_me
+        .value
+          = f.check_box :remember_me
+      .input_row
+        .submit
+          = f.submit "Login"
+          |
+          = link_to 'Registor', new_user_path
+
