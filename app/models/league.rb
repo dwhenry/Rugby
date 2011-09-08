@@ -5,13 +5,25 @@ class League < ActiveRecord::Base
 
   validates_presence_of :name
   validate :confirm_password
-  
+ 
+  def requires_password?
+    !password.blank?
+  end
+
+  def get_member(user)
+    league_members.detect{|lm| lm.user == user}
+  end
+
+  def has_member?(user)
+    users.include?(user)
+  end
+
   def users_by_position
     users.sort(&:points)
   end
 
-  def add_user(user)
-    self.league_members.create(:user => user)
+  def add_user(user, password)
+    self.league_members.create(:user => user, :password => password)
   end
 
   def confirm_password

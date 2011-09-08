@@ -10,18 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110818173903) do
-
-  create_table "fixtures", :force => true do |t|
-    t.float    "kick_off"
-    t.integer  "home_team_id"
-    t.integer  "away_team_id"
-    t.string   "location"
-    t.string   "name"
-    t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(:version => 20110907235535) do
 
   create_table "league_members", :force => true do |t|
     t.integer  "user_id"
@@ -38,11 +27,32 @@ ActiveRecord::Schema.define(:version => 20110818173903) do
     t.datetime "updated_at"
   end
 
+  create_table "matches", :force => true do |t|
+    t.date     "match_date"
+    t.float    "kick_off"
+    t.integer  "home_team_id"
+    t.integer  "away_team_id"
+    t.string   "location"
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "picks", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "match_id"
+    t.integer  "pick"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "teams", :force => true do |t|
     t.string   "name"
     t.string   "pool"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "short_name"
   end
 
   create_table "users", :force => true do |t|

@@ -1,6 +1,6 @@
 Rugby::Application.routes.draw do
   resources :leagues
-  resources :league_members, :only => [:create, :destroy]
+  resources :league_members, :only => [:create, :destroy, :new]
 
   get "main/index"
 
@@ -9,7 +9,8 @@ Rugby::Application.routes.draw do
   resource :account, :controller => 'users'
   resources :users
   resources :teams, :only => :index
-  resources :fixtures, :only => :index
+  resources :matches, :only => :index
+  resources :picks, :only => [:create, :index]
   resource :user_session
 
   # The priority is based upon order of creation:

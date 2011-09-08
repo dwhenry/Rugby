@@ -1,0 +1,37 @@
+.header
+  Picked a Winner?
+
+.pick_row.row_header
+  .name
+    Match
+  .pool
+    &nbsp;
+  .time
+    Time
+  .pick
+    (Average Pick)
+
+= form_for Pick.new do |f|
+  - @picks.each do |pick|
+    = fields_for "picks[]", pick do |p|
+      = p.hidden_field :match_id
+      .pick_row
+        .name
+          - if pick.can_set?
+            = p.label :home_team, 'Home', :style => 'display: none;'
+            = p.text_field :home_team, :class => 'home_team'
+            = pick.match.match
+            = p.label :away_team, 'Away', :style => 'display: none;'
+            = p.text_field :away_team, :class => 'away_team'
+          - else
+            = pick.match.match
+        .pool
+          = pick.match.home_team.try(:pool) || pick.match.description
+        .time
+          = "#{pick.match.kick_off.to_s.gsub(/\./,':')}0"
+          = pick.match.match_date.try(:strftime, '%d-%b-%Y')
+        .pick
+          = pick.details
+  .input_row
+    .submit
+      = f.submit 'Update'

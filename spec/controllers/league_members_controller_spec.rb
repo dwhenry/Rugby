@@ -26,7 +26,7 @@ describe LeagueMembersController do
 
       it "redirects to the main page" do
         post :create, :league_member => valid_attributes
-        response.should redirect_to(main_index_path)
+        response.should redirect_to(league_path(1))
       end
     end
 

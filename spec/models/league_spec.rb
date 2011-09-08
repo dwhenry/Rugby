@@ -6,8 +6,8 @@ describe League do
   context "adding a users to a league" do
     let(:user) { mock_model(User) }
     it "adds the user" do
-      subject.league_members.should_receive(:create).with(:user => user)
-      subject.add_user(user)
+      subject.league_members.should_receive(:create).with(:user => user, :password => nil)
+      subject.add_user(user, nil)
     end
   end
 

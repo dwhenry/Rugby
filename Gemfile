@@ -24,6 +24,7 @@ group :test, :development do
   gem 'selenium-webdriver', '>= 0.0.24'
   gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'launchy'
+  gem 'timecop'
 end
 
 # Use unicorn as the web server

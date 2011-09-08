@@ -22,20 +22,23 @@
   font-size: 18px;
   border-bottom: solid 1px #aaaaaa;
   color: #777777; }
-.page .fixture_row {
+.page .match_row, .page .pick_row {
   overflow: hidden;
   padding: 5px 0; }
-  .page .fixture_row .name {
+  .page .match_row .name, .page .pick_row .name {
     float: left;
-    width: 225px; }
-  .page .fixture_row .pool {
-    float: left;
-    width: 25px;
+    width: 200px;
     text-align: center; }
-  .page .fixture_row .time {
+    .page .match_row .name input, .page .pick_row .name input {
+      width: 20px; }
+  .page .match_row .pool, .page .pick_row .pool {
     float: left;
-    width: 75px;
+    width: 50px;
     text-align: center; }
-  .page .fixture_row .location {
+  .page .match_row .time, .page .pick_row .time {
     float: left;
-    width: 275px; }
+    width: 175px;
+    text-align: center; }
+  .page .match_row .location, .page .match_row .pick, .page .pick_row .location, .page .pick_row .pick {
+    float: left;
+    width: 175px; }

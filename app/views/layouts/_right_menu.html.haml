@@ -18,4 +18,6 @@
     .elements
       - current_user.current_picks.each do |pick|
         = pick.match
+    .element
+      = link_to "Picks", picks_path
 

@@ -21,4 +21,6 @@
         = league.users.size
 
       .password
-        No
+        = league.password.blank? ? 'No' : 'Yes'
+
+      = display_error_message(league).html_safe

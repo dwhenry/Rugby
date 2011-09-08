@@ -1,6 +1,7 @@
 class CreateFixtures < ActiveRecord::Migration
   def self.up
     create_table :fixtures do |t|
+      t.date :match_date
       t.float :kick_off
       t.references :home_team
       t.references :away_team

@@ -1,0 +1,17 @@
+.header
+  Join League:
+  = @league_member.league.name
+
+= form_for @league_member do |form|
+  = form.hidden_field :league_id
+  = form.hidden_field :user_id
+  .input_row
+    .field
+      = form.label :password
+
+    .value
+      = form.password_field :password
+
+  .input_row
+    .submit
+      = form.submit :join

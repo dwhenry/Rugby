@@ -45,7 +45,7 @@ class LeaguesController < ApplicationController
     @league = League.new(params[:league].merge(:admin_id => @current_user))
 
     if @league.save
-      @league.add_user(@current_user)
+      @league.add_user(@current_user, @league.password)
       redirect_to(main_index_path, :notice => 'League was successfully created.')
     else
       render :action => "new"

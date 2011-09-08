@@ -20,8 +20,8 @@ Then /^I should have leagues:$/ do |table|
   table.diff!(actual)
 end
 
-Given /^a league called "([^"]*)"$/ do |league_name|
-  League.create(:name => league_name)
+Given /^a league called "([^"]*)"(?: with password "([^"]*)")?$/ do |league_name, password|
+  League.create(:name => league_name, :password => password, :password_confirmation => password)
 end
 
 When /^I click leagues$/ do
@@ -46,3 +46,14 @@ When /^I join league "([^"]*)"$/ do |league_name|
   end
 end
 
+When /^I join league "([^"]*)" with password "([^"]*)"$/ do |league_name, password|
+  When %Q{I join league "#{league_name}"}
+  fill_in 'Password', :with => password
+  click_on 'join'
+end
+
+Then /^I have error message "([^"]*)" for "([^"]*)"$/ do |error_message, league_name|
+  within('.all_leagues .league', :text => league_name) do
+    page.should have_css('.error', :text => error_message)
+  end
+end
