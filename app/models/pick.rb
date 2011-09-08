@@ -42,10 +42,9 @@ class Pick < ActiveRecord::Base
 
   private
   def description_with(points)
-    return "" if points.blank?
-    return "Draw" if points == 0
-    return "#{match.home_team.try(:short_name)} by #{points}" if points > 0
-    "#{match.home_team.try(:short_name)} by #{points.abs}"
+    return "" if points.blank? || points == 0
+    return "#{match.home_team.try(:short_name)} by #{"%.2f" % points}" if points > 0
+    "#{match.home_team.try(:short_name)} by #{"%.2f" % points.abs}"
   end
 
   def valid_pick

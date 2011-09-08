@@ -12,6 +12,9 @@
     (Average Pick)
 
 = form_for Pick.new do |f|
+  .input_row
+    .submit
+      = f.submit 'Update'
   - @picks.each do |pick|
     = fields_for "picks[]", pick do |p|
       = p.hidden_field :match_id
