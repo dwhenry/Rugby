@@ -33,6 +33,9 @@
           = pick.match.match_date.try(:strftime, '%d-%b-%Y')
         .pick
           = pick.details
+        - if pick.error_messages
+          .errors
+            = pick.error_messages.join('<br>')
   .input_row
     .submit
       = f.submit 'Update'

@@ -10,18 +10,22 @@ class Pick < ActiveRecord::Base
   validates_uniqueness_of :match_id, :scope => :user_id
 
   def home_team
+    return @home_team if @updated
     @home_team ||= (pick && pick > 0 ? pick : nil)
   end
 
   def away_team
+    return @away_team if @updated
     @away_team ||= (pick && pick < 0 ? pick.abs : nil)
   end
 
   def home_team=(val)
+    @updated = true
     @home_team = (val.blank? ? nil : val.to_i)
   end
 
   def away_team=(val)
+    @updated = true
     @away_team = (val.blank? ? nil : val.to_i)
   end
 
