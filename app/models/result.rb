@@ -33,4 +33,9 @@ class Result < ActiveRecord::Base
     return 'Pending' if home_team.nil?
     "#{match.home_team.short_name} #{home_team} v #{match.away_team.short_name} #{away_team}"
   end
+
+  def diff
+    return nil unless home_team
+    home_team - away_team
+  end
 end

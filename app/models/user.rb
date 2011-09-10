@@ -13,7 +13,10 @@ class User < ActiveRecord::Base
   validates_presence_of :name
 
   def points
-    0
+    Match.all.map do |match|
+      pick = picks.first(:conditions => {:match_id => match.id}).try(:pick) || 0
+      match.points(pick)
+    end.sum
   end
 
   def add_to_all_user_league

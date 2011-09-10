@@ -2,11 +2,22 @@ class Match < ActiveRecord::Base
   belongs_to :home_team, :class_name => 'Team'
   belongs_to :away_team, :class_name => 'Team'
   has_many :picks
+  has_one :result
 
   validates_presence_of :kick_off
   validates_presence_of :location
   validates_presence_of :name
   validates_presence_of :description
+
+  def points(pick)
+    return 0 unless result.try(:diff)
+    diff = result.try(:diff)
+    return diff + 10 if pick == 0
+    return pick if diff == 0
+    return -10 if pick == diff
+    return (diff - pick).abs if (diff / diff.abs) == (pick / pick.abs)
+    (diff - pick).abs + 5
+  end
 
   def opponent_to(team)
     return home_team unless home_team == team

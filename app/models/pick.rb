@@ -38,17 +38,27 @@ class Pick < ActiveRecord::Base
   end
 
   def details
+    return results_details if match.try(:result).try(:home_team)
     picks = match.picks.map(&:pick).compact.select{|p| p != 0}
     return '' if picks.empty?
     avg = picks.inject(0.0) {|s, v| s + v} / picks.size
     "#{description_with(pick)} (#{description_with(avg)})"
   end
 
-  private
   def description_with(points)
     return "" if points.blank? || points == 0
     return "#{match.home_team.try(:short_name)} by #{"%.1f" % points}" if points > 0
     "#{match.away_team.try(:short_name)} by #{"%.1f" % points.abs}"
+  end
+
+  private
+  def results_details
+    points = match.points(pick || 0)
+    average = User.all.inject(0.0) do |points, user|
+      pick = match.picks.first(:conditions => {:user_id => user.id}).try(:pick) || 0
+      points + match.points(pick || 0)
+    end / User.all.size
+    "#{points} / average #{average}"
   end
 
   def valid_pick

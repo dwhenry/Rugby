@@ -24,6 +24,9 @@
             = pick.match.match
             = p.label :away_team, 'Away', :style => 'display: none;'
             = p.text_field :away_team, {:class => 'away_team', :onchange => 'clear_other(this)'}
+          - elsif pick.match.match_date <= Date.today
+            = pick.match.match
+            = "(#{pick.description_with(pick.pick)})"
           - else
             = pick.match.match
         .pool
