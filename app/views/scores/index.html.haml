@@ -1,17 +1,68 @@
 .header
   Player Scores
 
+
 .score_row.row_header
   .name
     Match
-  - @users.each do |user|
-    .player
-      = user.name
+    = link_to_function "&#8592;".html_safe, 'hide_column()'
+    = link_to_function "&#8594;".html_safe, 'show_column()'
+  .players_wrapper
+    .players
+      - @users.each do |user|
+        .player{:class => cycle('odd', 'even')}
+          = user.name
 
-- @matches.each do |match|
-  .score_row
-    .name
-      = match.match
-    - @users.each do |user|
-      .player
-        = points_for(match, user)
+.scores_wrapper
+  .scores
+    - @matches.each do |match|
+      .score_row
+        .name
+          = match.match
+        .players_wrapper
+          - reset_cycle
+          .players
+            - @users.each do |user|
+              .player{:class => cycle('odd', 'even')}
+                = points_for(match, user).to_s.html_safe
+
+%script{:type=>"text/javascript"} 
+  Event.observe(window, 'load', function() {
+  $$('.players').each(function(elem) {
+  elem.setStyle({'width': (100 * 3 *  elem.children.length) + 'px'})
+  });
+  });
+
+  function hide_column() {
+  $$('.players').any(function(wrapper) {
+  hide_first(wrapper);
+  });
+  };
+
+  function show_column() {
+  $$('.players').any(function(wrapper) {
+  show_first(wrapper);
+  });
+  };
+
+  function hide_first(row) {
+  $A(row.children).any(function(column) {
+  if(column.visible()) {
+  column.hide()
+  return true;
+  };
+  return false;
+  });
+  }
+
+  function show_first(row) {
+  $A(row.children).reverse().any(function(column) {
+  if(!column.visible()) {
+  column.show()
+  return true;
+  };
+  return false;
+  });
+  }
+
+

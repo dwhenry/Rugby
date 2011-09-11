@@ -50,21 +50,40 @@ a:hover
     border-bottom: solid 1px #AAA
     color: #777
 
+  .players_wrapper
+    float: left
+    width: 460px
+    overflow: hidden
+
+    .players
+      overflow: hidden
+
+  .scores_wrapper
+    height: 500px
+    overflow-y: auto
+
+    .scores
+      
   .score_row
     overflow: hidden
-    padding: 5px 0
+    padding: 0 0
 
     .name
       float: left
       width: 120px
+      margin: 5px 0
 
     .player
       float: left
       text-align: center
-      width: 100px
+      width: 92px
+      padding: 5px 0
 
-    .even
-      background: #EEE
+      span.small
+        font-size: 9px
+
+    .odd
+      background: #DDD
 
   .match_row, .pick_row, .result_row
     overflow: hidden

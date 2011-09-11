@@ -39,18 +39,31 @@ a:hover {
   font-size: 18px;
   border-bottom: solid 1px #aaaaaa;
   color: #777777; }
+.page .players_wrapper {
+  float: left;
+  width: 460px;
+  overflow: hidden; }
+  .page .players_wrapper .players {
+    overflow: hidden; }
+.page .scores_wrapper {
+  height: 500px;
+  overflow-y: auto; }
 .page .score_row {
   overflow: hidden;
-  padding: 5px 0; }
+  padding: 0 0; }
   .page .score_row .name {
     float: left;
-    width: 120px; }
+    width: 120px;
+    margin: 5px 0; }
   .page .score_row .player {
     float: left;
     text-align: center;
-    width: 100px; }
-  .page .score_row .even {
-    background: #eeeeee; }
+    width: 92px;
+    padding: 5px 0; }
+    .page .score_row .player span.small {
+      font-size: 9px; }
+  .page .score_row .odd {
+    background: #dddddd; }
 .page .match_row, .page .pick_row, .page .result_row {
   overflow: hidden;
   padding: 5px 0; }
