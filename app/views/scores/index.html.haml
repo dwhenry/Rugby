@@ -5,8 +5,8 @@
 .score_row.row_header
   .name
     Match
-    = link_to_function "&#8592;".html_safe, 'hide_column()'
-    = link_to_function "&#8594;".html_safe, 'show_column()'
+    = link_to_function "&#8592;".html_safe, 'show_column()'
+    = link_to_function "&#8594;".html_safe, 'hide_column()'
   .players_wrapper
     .players
       - @users.each do |user|
