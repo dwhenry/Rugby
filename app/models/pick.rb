@@ -83,7 +83,6 @@ class Pick < ActiveRecord::Base
   end
 
   def match_time
-    kick_off = (match.kick_off - 1).to_s.gsub(/\./,':')
-    Time.parse("#{Date.today} #{kick_off}0M")
+    match.match_time
   end
 end

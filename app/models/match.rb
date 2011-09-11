@@ -37,4 +37,13 @@ class Match < ActiveRecord::Base
   def town
     location.split(',').first
   end
+
+  def match_time
+    time = (kick_off - 1).to_s.gsub(/\./,':')
+    Time.parse("#{Date.today} #{time}0M")
+  end
+
+  def match_finish_time
+    match_time.advance(:hours => 3)
+  end
 end
