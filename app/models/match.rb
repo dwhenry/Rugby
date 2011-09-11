@@ -12,8 +12,8 @@ class Match < ActiveRecord::Base
   def points_for_pick(pick)
     return 0 unless result.try(:diff)
     diff = result.try(:diff)
-    return diff + 10 if pick == 0
-    return pick if diff == 0
+    return diff.abs + 10 if pick == 0
+    return pick.abs if diff == 0
     return -10 if pick == diff
     return (diff - pick).abs if (diff / diff.abs) == (pick / pick.abs)
     (diff - pick).abs + 5
