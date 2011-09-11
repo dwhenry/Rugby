@@ -1,0 +1,17 @@
+.header
+  Player Scores
+
+.score_row.row_header
+  .name
+    Match
+  - @users.each do |user|
+    .player
+      = user.name
+
+- @matches.each do |match|
+  .score_row
+    .name
+      = match.match
+    - @users.each do |user|
+      .player
+        = points_for(match, user)

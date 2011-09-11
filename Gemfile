@@ -25,6 +25,7 @@ group :test, :development do
   gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'launchy'
   gem 'timecop'
+  gem 'taps'
 end
 
 # Use unicorn as the web server

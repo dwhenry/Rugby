@@ -39,6 +39,18 @@ a:hover {
   font-size: 18px;
   border-bottom: solid 1px #aaaaaa;
   color: #777777; }
+.page .score_row {
+  overflow: hidden;
+  padding: 5px 0; }
+  .page .score_row .name {
+    float: left;
+    width: 120px; }
+  .page .score_row .player {
+    float: left;
+    text-align: center;
+    width: 100px; }
+  .page .score_row .even {
+    background: #eeeeee; }
 .page .match_row, .page .pick_row, .page .result_row {
   overflow: hidden;
   padding: 5px 0; }
