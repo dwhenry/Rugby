@@ -26,7 +26,9 @@ class Result < ActiveRecord::Base
   end
 
   def can_set?(user)
-    user.admin? && match.match_date < Date.today
+    user.admin? && 
+      (match.match_date < Date.today ||
+      (match.match_date == Date.today && Time.now.utc > match.match_finish_time.utc))
   end
 
   def details
