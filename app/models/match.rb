@@ -9,7 +9,7 @@ class Match < ActiveRecord::Base
   validates_presence_of :name
   validates_presence_of :description
 
-  def points(pick)
+  def points_for_pick(pick)
     return 0 unless result.try(:diff)
     diff = result.try(:diff)
     return diff + 10 if pick == 0

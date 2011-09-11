@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   def points
     Match.all.map do |match|
       pick = picks.first(:conditions => {:match_id => match.id}).try(:pick) || 0
-      match.points(pick)
+      match.points_for_pick(pick)
     end.sum
   end
 
