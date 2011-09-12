@@ -42,12 +42,12 @@ class Pick < ActiveRecord::Base
     picks = match.picks.map(&:pick).compact.select{|p| p != 0}
     return '' if picks.empty?
     avg = picks.inject(0.0) {|s, v| s + v} / picks.size
-    "#{description_with(pick)} (#{description_with(avg)})"
+    "#{description_with(pick)} (#{description_with(avg, 1)})"
   end
 
-  def description_with(points)
+  def description_with(points, decimals=0)
     return "" if points.blank? || points == 0
-    return "#{match.home_team.try(:short_name)} by #{"%.1f" % points}" if points > 0
+    return "#{match.home_team.try(:short_name)} by #{"%.#{decimals}f" % points}" if points > 0
     "#{match.away_team.try(:short_name)} by #{"%.1f" % points.abs}"
   end
 
