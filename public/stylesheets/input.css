@@ -48,7 +48,7 @@ a:hover {
 .page .scores_wrapper {
   height: 500px;
   overflow-y: auto; }
-.page .score_row.title .player {
+.page .score_row.row_header .player {
   height: auto; }
 .page .score_row {
   overflow: hidden;
