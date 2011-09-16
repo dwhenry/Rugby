@@ -30,7 +30,7 @@ class FixPicks < ActiveRecord::Migration
       if match.results.diff > 0
         value +=match.results.diff
       else
-        value = match.results.diff - value
+        value = match.result.diff - value
       end
       pick.update_attribute(:pick, value.to_i)
     end
