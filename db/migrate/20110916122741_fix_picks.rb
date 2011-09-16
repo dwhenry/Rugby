@@ -25,7 +25,8 @@ class FixPicks < ActiveRecord::Migration
     if value
       pick.update_attribute(:pick, value)
     else
-      value = match.picks.map{|p| p.match.points_for_pick(p.pick)}.sum.to_f / match.picks.size
+      picks = match.picks(:include => :user, :conditions => ['users.id != ?', user])
+      value = picks.map{|p| p.match.points_for_pick(p.pick)}.sum.to_f / match.picks.size
       pick.update_attribute(:pick, value.to_i)
     end
   end
