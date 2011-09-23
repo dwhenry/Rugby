@@ -1,6 +1,6 @@
 class SarahAgain < ActiveRecord::Migration
   def self.up
-    user = User.find_by_login('nutter')
+    user = User.find_by_login('Nutter')
     set_pick('RSA', 'NAM', 70, user)
   end
 
