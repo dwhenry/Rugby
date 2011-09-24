@@ -5,7 +5,7 @@ class MeAgain < ActiveRecord::Migration
 
     match =  Match.all.detect{|m| m.home_team.short_name == 'RSA' && m.away_team.short_name == 'NAM'}
     user = User.find_by_login('Nutter')
-    picks = Pick.all(:conditions => {:match => match, :user_id => user.id})
+    picks = Pick.all(:conditions => {:match_id => match.id, :user_id => user.id})
     puts picks.inspect
     picks.each(&:deleted)
     puts picks.inspect
