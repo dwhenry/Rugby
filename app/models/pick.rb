@@ -58,7 +58,7 @@ class Pick < ActiveRecord::Base
       pick = match.picks.first(:conditions => {:user_id => user.id}).try(:pick) || 0
       points + match.points_for_pick(pick || 0)
     end / User.all.size
-    "#{points} / average #{average}"
+    "#{points} / avg #{"%.1f" % average}"
   end
 
   def valid_pick
