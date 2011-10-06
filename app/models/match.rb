@@ -25,12 +25,12 @@ class Match < ActiveRecord::Base
   end
 
   def match
-    return "#{home_team.try(:short_name)} v #{away_team.try(:short_name)}" if name == description
+    return "#{home_team.try(:short_name)} v #{away_team.try(:short_name)}" if home_team
     name
   end
 
   def full_name
-    return "#{home_team.try(:name)} v #{away_team.try(:name)}" if name == description
+    return "#{home_team.try(:name)} v #{away_team.try(:name)}" if home_team
     name
   end
 
