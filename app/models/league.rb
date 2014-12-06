@@ -5,8 +5,8 @@ class League < ActiveRecord::Base
 
   validates_presence_of :name
   validate :confirm_password
-  default_scope :order => 'name'
- 
+  default_scope { order('name') }
+
   def requires_password?
     !password.blank?
   end

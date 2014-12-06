@@ -8,7 +8,7 @@ class Match < ActiveRecord::Base
   validates_presence_of :location
   validates_presence_of :name
   validates_presence_of :description
-  default_scope :order => 'match_date, kick_off'
+  default_scope { order('match_date, kick_off') }
 
   def points_for_pick(pick)
     return 0 unless result.try(:diff)

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -8,18 +9,21 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111012123110) do
+ActiveRecord::Schema.define(version: 20110924071253) do
 
-  create_table "league_members", :force => true do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "league_members", force: true do |t|
     t.integer  "user_id"
     t.integer  "league_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "leagues", :force => true do |t|
+  create_table "leagues", force: true do |t|
     t.string   "name"
     t.integer  "admin_id"
     t.string   "password"
@@ -27,7 +31,7 @@ ActiveRecord::Schema.define(:version => 20111012123110) do
     t.datetime "updated_at"
   end
 
-  create_table "matches", :force => true do |t|
+  create_table "matches", force: true do |t|
     t.date     "match_date"
     t.float    "kick_off"
     t.integer  "home_team_id"
@@ -39,7 +43,7 @@ ActiveRecord::Schema.define(:version => 20111012123110) do
     t.datetime "updated_at"
   end
 
-  create_table "picks", :force => true do |t|
+  create_table "picks", force: true do |t|
     t.integer  "user_id"
     t.integer  "match_id"
     t.integer  "pick"
@@ -47,7 +51,7 @@ ActiveRecord::Schema.define(:version => 20111012123110) do
     t.datetime "updated_at"
   end
 
-  create_table "results", :force => true do |t|
+  create_table "results", force: true do |t|
     t.integer  "match_id"
     t.integer  "home_team"
     t.integer  "away_team"
@@ -55,7 +59,7 @@ ActiveRecord::Schema.define(:version => 20111012123110) do
     t.datetime "updated_at"
   end
 
-  create_table "teams", :force => true do |t|
+  create_table "teams", force: true do |t|
     t.string   "name"
     t.string   "pool"
     t.datetime "created_at"
@@ -63,23 +67,23 @@ ActiveRecord::Schema.define(:version => 20111012123110) do
     t.string   "short_name"
   end
 
-  create_table "users", :force => true do |t|
+  create_table "users", force: true do |t|
     t.integer  "team_id"
-    t.string   "login",                                  :null => false
-    t.string   "email",                                  :null => false
-    t.string   "crypted_password",                       :null => false
-    t.string   "password_salt",                          :null => false
-    t.string   "persistence_token",                      :null => false
-    t.string   "single_access_token",                    :null => false
-    t.string   "perishable_token",                       :null => false
-    t.integer  "login_count",         :default => 0,     :null => false
-    t.integer  "failed_login_count",  :default => 0,     :null => false
+    t.string   "login",                               null: false
+    t.string   "email",                               null: false
+    t.string   "crypted_password",                    null: false
+    t.string   "password_salt",                       null: false
+    t.string   "persistence_token",                   null: false
+    t.string   "single_access_token",                 null: false
+    t.string   "perishable_token",                    null: false
+    t.integer  "login_count",         default: 0,     null: false
+    t.integer  "failed_login_count",  default: 0,     null: false
     t.datetime "last_request_at"
     t.datetime "current_login_at"
     t.datetime "last_login_at"
     t.string   "current_login_ip"
     t.string   "last_login_ip"
-    t.boolean  "admin",               :default => false
+    t.boolean  "admin",               default: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
