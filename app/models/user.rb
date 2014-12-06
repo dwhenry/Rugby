@@ -14,13 +14,13 @@ class User < ActiveRecord::Base
 
   def points
     Match.all.map do |match|
-      pick = picks.first(:conditions => {:match_id => match.id}).try(:pick) || 0
+      pick = picks.find_by(match_id: match.id).try(:pick) || 0
       match.points_for_pick(pick)
     end.sum
   end
 
   def add_to_all_user_league
-    League.first(:conditions => {:name => 'All Users'}).try(:add_user, self, nil)
+    League.find_by(name: 'All Users').try(:add_user, self, nil)
   end
 
   def get_picks
