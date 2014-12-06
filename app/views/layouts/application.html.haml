@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title 
+    %title
       Rugby Tipper
     = stylesheet_link_tag :all
     = javascript_include_tag :defaults
@@ -10,13 +10,14 @@
   %body
     .page
       = render :partial => 'layouts/user_details'
-      = yield
+      .content
+        = yield
 
-      - if @current_user
-        = render :partial => 'layouts/left_menu'
-        = render :partial => 'layouts/right_menu'
+        - if @current_user
+          = render :partial => 'layouts/left_menu'
+          = render :partial => 'layouts/right_menu'
 
-%script{:type=>"text/javascript"} 
+%script{:type=>"text/javascript"}
   Event.observe(window, 'load', function() {
   if($('right_menu')){
   height = $$('.page').first().getHeight() - 47;

@@ -4,8 +4,8 @@ class LeaguesController < ApplicationController
   # GET /leagues
   # GET /leagues.xml
   def index
-    @leagues = League.all(:conditions => "name != 'All Users'")
-    @all_league = League.first(:conditions => "name = 'All Users'")
+    @leagues = League.where.not(name: 'All Users')
+    @all_league = League.find_by(name: 'All Users')
 
     respond_to do |format|
       format.html # index.html.erb
