@@ -5,7 +5,7 @@ class Team < ActiveRecord::Base
   default_scope { order('name') }
 
   def matches
-    Match.all(:conditions => ["home_team_id = :id or away_team_id = :id", {:id => id}])
+    Match.where(["home_team_id = :id or away_team_id = :id", {:id => id}])
   end
 
   def self.team_by_pool

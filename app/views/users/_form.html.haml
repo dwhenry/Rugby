@@ -1,5 +1,12 @@
 .input_row
-  = form.error_messages
+  - if @user.errors.any?
+    #error_explanation.input_row
+      %h2
+        = pluralize(@user.errors.count, "error")
+        prohibited:
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
 .input_row
   .field
     = form.label :login
