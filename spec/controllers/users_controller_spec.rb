@@ -1,9 +1,9 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe UsersController do
 
   describe "GET 'new'" do
-    let(:user) { mock_model(User) }
+    let(:user) { double(:user) }
     before { User.stub(:new => user) }
 
     it "assigns a new user" do
@@ -13,8 +13,8 @@ describe UsersController do
   end
 
   describe "POST 'create'" do
-    let(:params) { mock(:params) }
-    let(:user) { mock_model(User, :save => true) }
+    let(:params) { { name: 'test', password: 'password' } }
+    let(:user) { double(:user, :save => true) }
     before { User.stub(:new => user) }
 
     it "create a user from the params" do

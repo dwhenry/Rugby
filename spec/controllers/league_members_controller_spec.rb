@@ -1,6 +1,4 @@
-require 'spec_helper'
-
-require "authlogic/test_case" # include at the top of test_helper.rb
+require 'rails_helper'
 
 describe LeagueMembersController do
   include Authlogic::TestCase

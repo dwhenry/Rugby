@@ -1,10 +1,10 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe League do
   subject { League.new }
 
   context "adding a users to a league" do
-    let(:user) { mock_model(User) }
+    let(:user) { User.new }
     it "adds the user" do
       subject.league_members.should_receive(:create).with(:user => user, :password => nil)
       subject.add_user(user, nil)
@@ -28,20 +28,20 @@ describe League do
   end
 
   context 'position for user' do
-    let(:user) { mock_model(User, :points => 10) }
-    let(:other_user) { mock_model(User, :points => 12) }
+    let(:user) { User.new(points: 10) }
+    let(:other_user) { double(:user, :points => 12) }
     subject { League.new }
 
     context 'when no users' do
       it 'shows 0 of 0' do
-        subject.position_for(user).should == '0 (0)'
+        expect(subject.position_for(user)).to == '0 (0)'
       end
     end
 
     context 'when 1 user' do
       before { subject.users = [user] }
       it 'shows 1 of 1' do
-        subject.position_for(user).should == '1 (1)'
+        expect(subject.position_for(user)).to == '1 (1)'
       end
     end
 
@@ -49,14 +49,14 @@ describe League do
       context 'when 1st user' do
         before { subject.users = [user, other_user] }
         it 'shows 1 of 2' do
-          subject.position_for(user).should == '1 (2)'
+          expect(subject.position_for(user)).to == '1 (2)'
         end
       end
 
       context 'when 2nd user' do
         before { subject.users = [other_user, user] }
         it 'shows 2 of 2' do
-          subject.position_for(user).should == '2 (2)'
+          expect(subject.position_for(user)).to == '2 (2)'
         end
       end
 
@@ -67,7 +67,7 @@ describe League do
         end
 
         it 'shows 1 of 2' do
-          subject.position_for(user).should == '1 (2)'
+          expect(subject.position_for(user)).to == '1 (2)'
         end
       end
     end

@@ -43,7 +43,7 @@ class LeaguesController < ApplicationController
   # POST /leagues
   # POST /leagues.xml
   def create
-    @league = League.new(params[:league].merge(:admin_id => @current_user))
+    @league = League.new(params.require(:league).permit(:name).merge(:admin_id => @current_user))
 
     if @league.save
       @league.add_user(@current_user, @league.password)
@@ -59,12 +59,10 @@ class LeaguesController < ApplicationController
     @league = League.find(params[:id])
 
     respond_to do |format|
-      if @league.update_attributes(params[:league])
-        format.html { redirect_to(@league, :notice => 'League was successfully updated.') }
-        format.xml  { head :ok }
+      if @league.update_attributes(params.require(:league).permit(:name))
+        redirect_to(@league, :notice => 'League was successfully updated.')
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @league.errors, :status => :unprocessable_entity }
+        render :action => "edit"
       end
     end
   end
@@ -76,8 +74,7 @@ class LeaguesController < ApplicationController
     @league.destroy
 
     respond_to do |format|
-      format.html { redirect_to(leagues_url) }
-      format.xml  { head :ok }
+      redirect_to(leagues_url)
     end
   end
 end
