@@ -55,7 +55,7 @@ class Pick < ActiveRecord::Base
   def results_details
     points = match.points_for_pick(pick || 0)
     average = User.all.inject(0.0) do |points, user|
-      pick = match.picks.first(:conditions => {:user_id => user.id}).try(:pick) || 0
+      pick = match.picks.find_by(user_id: user.id).try(:pick) || 0
       points + match.points_for_pick(pick || 0)
     end / User.all.size
     "#{points} / avg #{"%.1f" % average}"

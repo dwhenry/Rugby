@@ -2,15 +2,15 @@ When /^I create an account for user "([^\"]*)"$/ do |user_name|
   Team.create(:name => 'Australia', :pool => 'A')
   within('.content') do
     click_on 'Register'
-    fill_in 'Login', :with => user_name
-    fill_in 'Name', :with => user_name
-    fill_in 'E-Mail', :with => "#{user_name}@test.com"
-    fill_in 'Password', :with => "password"
-    fill_in 'Password Confirmation', :with => "password"
-    select 'Australia', :from => 'My Team'
-    within('form') do
-      click_on 'Register'
-    end
+  end
+  fill_in 'Login', :with => user_name
+  fill_in 'Name', :with => user_name
+  fill_in 'E-Mail', :with => "#{user_name}@test.com"
+  fill_in 'Password', :with => "password"
+  fill_in 'Password Confirmation', :with => "password"
+  select 'Australia', :from => 'My Team'
+  within('form') do
+    click_on 'Register'
   end
 end
 

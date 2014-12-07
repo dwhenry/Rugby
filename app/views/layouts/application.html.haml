@@ -3,10 +3,9 @@
   %head
     %title
       Rugby Tipper
-    = stylesheet_link_tag :all
-    = javascript_include_tag :defaults
+    = stylesheet_link_tag :application
+    = javascript_include_tag :application
     = csrf_meta_tag
-    = stylesheet_link_tag 'user_details', 'input'
   %body
     .page
       = render :partial => 'layouts/user_details'
@@ -17,11 +16,3 @@
           = render :partial => 'layouts/left_menu'
           = render :partial => 'layouts/right_menu'
 
-%script{:type=>"text/javascript"}
-  Event.observe(window, 'load', function() {
-  if($('right_menu')){
-  height = $$('.page').first().getHeight() - 47;
-  $('right_menu').setStyle({'height': height + 'px'});
-  $('left_menu').setStyle({'height': height + 'px'});
-  };
-  });

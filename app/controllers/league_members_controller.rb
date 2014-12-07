@@ -2,12 +2,12 @@ class LeagueMembersController < ApplicationController
   before_filter :require_user
 
   def create
-    @league_member = LeagueMember.new(params[:league_member])
+    @league_member = LeagueMember.new(params.require(:league_member).permit(:user_id, :league_id, :password))
     if @league_member.save
       redirect_to league_path(@league_member.league_id)
     else
-      @leagues = League.all(:conditions => "name != 'All Users'")
-      @all_league = League.first(:conditions => "name = 'All Users'")
+      @leagues = League.where.not(name: 'All Users')
+      @all_league = League.find_by(name: 'All Users')
       render :template => "leagues/index"
     end
   end
@@ -18,6 +18,6 @@ class LeagueMembersController < ApplicationController
   end
 
   def new
-    @league_member = LeagueMember.new(params[:league_member])
+    @league_member = LeagueMember.new(params.require(:league_member).permit(:user_id, :league_id, :league_password))
   end
 end

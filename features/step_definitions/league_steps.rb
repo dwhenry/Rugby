@@ -31,9 +31,9 @@ end
 Then /^I should see leagues:$/ do |table|
   selectors = lambda do |row|
     [
-      row.css('.name').text,
-      row.css('.size').text,
-      row.css('.password').text
+      row.find('.name').text,
+      row.find('.size').text,
+      row.find('.password').text
     ]
   end
   actual = tableish('.all_leagues .league', selectors)
@@ -47,7 +47,7 @@ When /^I join league "([^"]*)"$/ do |league_name|
 end
 
 When /^I join league "([^"]*)" with password "([^"]*)"$/ do |league_name, password|
-  When %Q{I join league "#{league_name}"}
+  step %Q{I join league "#{league_name}"}
   fill_in 'Password', :with => password
   click_on 'join'
 end

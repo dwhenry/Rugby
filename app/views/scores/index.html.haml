@@ -5,8 +5,8 @@
 .score_row.row_header
   .name
     Match
-    = link_to_function "&#8592;".html_safe, 'show_column()'
-    = link_to_function "&#8594;".html_safe, 'hide_column()'
+    = link_to "&#8592;".html_safe, '#', onclick: 'show_column()'
+    = link_to "&#8594;".html_safe, '#', onclick: 'hide_column()'
   .players_wrapper
     .players
       - @users.each do |user|
@@ -25,44 +25,44 @@
             - @users.each do |user|
               .player{:class => cycle('odd', 'even')}
                 = points_for(match, user).to_s.html_safe
-
-%script{:type=>"text/javascript"} 
-  Event.observe(window, 'load', function() {
-  $$('.players').each(function(elem) {
-  elem.setStyle({'width': (100 * 3 *  elem.children.length) + 'px'})
-  });
-  });
-
-  function hide_column() {
-  $$('.players').any(function(wrapper) {
-  hide_first(wrapper);
-  });
-  };
-
-  function show_column() {
-  $$('.players').any(function(wrapper) {
-  show_first(wrapper);
-  });
-  };
-
-  function hide_first(row) {
-  $A(row.children).any(function(column) {
-  if(column.visible()) {
-  column.hide()
-  return true;
-  };
-  return false;
-  });
-  }
-
-  function show_first(row) {
-  $A(row.children).reverse().any(function(column) {
-  if(!column.visible()) {
-  column.show()
-  return true;
-  };
-  return false;
-  });
-  }
-
+-#
+-#%script{:type=>"text/javascript"}
+-#  Event.observe(window, 'load', function() {
+-#  $('.players').each(function(elem) {
+-#  elem.setStyle({'width': (100 * 3 *  elem.children.length) + 'px'})
+-#  });
+-#  });
+-#
+-#  function hide_column() {
+-#  $$('.players').any(function(wrapper) {
+-#  hide_first(wrapper);
+-#  });
+-#  };
+-#
+-#  function show_column() {
+-#  $$('.players').any(function(wrapper) {
+-#  show_first(wrapper);
+-#  });
+-#  };
+-#
+-#  function hide_first(row) {
+-#  $A(row.children).any(function(column) {
+-#  if(column.visible()) {
+-#  column.hide()
+-#  return true;
+-#  };
+-#  return false;
+-#  });
+-#  }
+-#
+-#  function show_first(row) {
+-#  $A(row.children).reverse().any(function(column) {
+-#  if(!column.visible()) {
+-#  column.show()
+-#  return true;
+-#  };
+-#  return false;
+-#  });
+-#  }
+-#
 

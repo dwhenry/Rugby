@@ -3,6 +3,7 @@ require 'rails_helper'
 describe TeamsController do
   include Authlogic::TestCase
   setup :activate_authlogic # run before tests are executed
+
   def valid_attributes
     {:name => 'Team', :pool => 'A'}
   end

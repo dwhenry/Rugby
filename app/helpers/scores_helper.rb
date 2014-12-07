@@ -1,6 +1,6 @@
 module ScoresHelper
   def points_for(match, user)
-    pick = match.picks.first(:conditions => {:user_id => user.id})
+    pick = match.picks.find_by(user_id: user.id)
     if match.result.try(:home_team)
       "#{points_for_pick(match, pick)} <span class='small'>(#{selection_for(pick) || 'none'})</span>"
     elsif pick && pick.pick != 0
