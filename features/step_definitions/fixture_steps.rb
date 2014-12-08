@@ -43,8 +43,16 @@ class MatchCreator
   def self.for_date(date)
     team_a = Team.create!(:name => 'Team A', :short_name => 'TMA', :pool => 'A')
     team_b = Team.create!(:name => 'Team B', :short_name => 'TMB', :pool => 'A')
-    Match.create(:home_team => team_a, :away_team => team_b, :name => 'A v B',
-                 :description => 'A v B', :match_date => date, :kick_off => 7,
-                 :location => 'Anywhere')
+    Match.create!(
+      name: 'A v B',
+      description: 'A v B',
+      match_date: date,
+      kick_off: 7,
+      location: 'Anywhere',
+      sides: [
+        Side.new(side: 'home', team: team_a),
+        Side.new(side: 'away', team: team_b)
+      ]
+    )
   end
 end

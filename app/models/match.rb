@@ -1,6 +1,10 @@
 class Match < ActiveRecord::Base
-  belongs_to :home_team, :class_name => 'Team'
-  belongs_to :away_team, :class_name => 'Team'
+  has_many :sides
+  has_one :home_side, -> { where(side: 'home') }, class_name: 'Side'
+  has_one :away_side, -> { where(side: 'away') }, class_name: 'Side'
+  has_one :home_team, through: 'home_side', source: 'team'
+  has_one :away_team, through: 'away_side', source: 'team'
+
   has_many :picks
   has_one :result
 
