@@ -5,6 +5,13 @@ describe Match do
     subject { Match.new(:result => result) }
     let(:result) { Result.new(away_team: 20) }
 
+    context 'pick a draw and its a draw' do
+      xit 'points == -10 - yes you get the bonus' do
+        result.home_team = 20
+        expect(subject.points_for_pick(0)).to eq -10
+      end
+    end
+
     context 'diff on the home team when home team wins' do
       it 'points == error when error is positive' do
         result.home_team = 29

@@ -11,28 +11,33 @@ class Match < ActiveRecord::Base
   default_scope { order('match_date, kick_off') }
 
   def points_for_pick(pick)
-    return 0 unless result.try(:diff)
-    diff = result.try(:diff)
-    return diff.abs + 10 if pick == 0
-    return pick.abs if diff == 0
-    return -10 if pick == diff
-    return (diff - pick).abs if (diff / diff.abs) == (pick / pick.abs)
-    (diff - pick).abs + 5
+    if diff = result.try(:diff)
+      if pick == 0 # no pick or picked a draw so 10 point penalty
+        diff.abs + 10
+      elsif diff == 0 # its a draw so just the points diff
+        pick.abs
+      elsif pick == diff # dead on so get a bonus
+        -10
+      elsif (diff / diff.abs) == (pick / pick.abs) # right team so just the points diff
+        (diff - pick).abs
+      else # wrong team to 5 point penalty
+        (diff - pick).abs + 5
+      end
+    else # no result so no points
+      0
+    end
   end
 
   def opponent_to(team)
-    return home_team unless home_team == team
-    away_team
+    home_team == team ? away_team : home_team
   end
 
   def match
-    return "#{home_team.try(:short_name)} v #{away_team.try(:short_name)}" if home_team
-    name
+    home_team ? "#{home_team.try(:short_name)} v #{away_team.try(:short_name)}" : name
   end
 
   def full_name
-    return "#{home_team.try(:name)} v #{away_team.try(:name)}" if home_team
-    name
+    home_team ? "#{home_team.try(:name)} v #{away_team.try(:name)}" : name
   end
 
   def town
