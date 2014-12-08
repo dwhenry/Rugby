@@ -1,10 +1,6 @@
 class Match < ActiveRecord::Base
-  has_many :sides
-  has_one :home_side, -> { where(side: 'home') }, class_name: 'Side'
-  has_one :away_side, -> { where(side: 'away') }, class_name: 'Side'
-  has_one :home_team, through: 'home_side', source: 'team'
-  has_one :away_team, through: 'away_side', source: 'team'
-  has_many :teams, -> { order('sides.side DESC') }, through: :sides
+  has_many :sides, -> { order(side: :desc) }
+  has_many :teams, through: :sides
 
   has_many :picks
   has_one :result
@@ -13,7 +9,12 @@ class Match < ActiveRecord::Base
   validates_presence_of :location
   validates_presence_of :name
   validates_presence_of :description
+  validates :sides, length: { in: (0..2) }
+
   default_scope { order('match_date, kick_off') }
+
+  def home_team; teams.first; end
+  def away_team; teams.last; end
 
   def points_for_pick(pick)
     if diff = result.try(:diff)
