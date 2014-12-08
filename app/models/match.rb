@@ -4,6 +4,7 @@ class Match < ActiveRecord::Base
   has_one :away_side, -> { where(side: 'away') }, class_name: 'Side'
   has_one :home_team, through: 'home_side', source: 'team'
   has_one :away_team, through: 'away_side', source: 'team'
+  has_many :teams, -> { order('sides.side DESC') }, through: :sides
 
   has_many :picks
   has_one :result
@@ -33,19 +34,23 @@ class Match < ActiveRecord::Base
   end
 
   def opponent_to(team)
-    home_team == team ? away_team : home_team
+    teams.where.not(id: team.id).first
   end
 
   def match
-    home_team ? "#{home_team.try(:short_name)} v #{away_team.try(:short_name)}" : name
+    teams.map(&:short_name).join(' v ').presence || name
   end
 
   def full_name
-    home_team ? "#{home_team.try(:name)} v #{away_team.try(:name)}" : name
+    teams.map(&:name).join(' v ').presence || name
   end
 
   def town
     location.split(',').first
+  end
+
+  def pool
+    teams.first.try(:pool)
   end
 
   def match_time

@@ -1,6 +1,28 @@
 require 'rails_helper'
 
 describe Match do
+  describe '#match' do
+    subject { Match.create!(name: 'match name', kick_off: 5, location: 'park', description: 'game') }
+
+    context 'when home and away teams exist' do
+      before do
+        subject.sides.create!(side: 'home', team: Team.create!(short_name: 'ZZZ', name: 'ZZZ', pool: 'A'))
+        subject.sides.create!(side: 'away', team: Team.create!(short_name: 'AAA', name: 'ZZZ', pool: 'A'))
+        subject.reload
+      end
+
+      it 'uses the team short names' do
+        expect(subject.match).to eq('ZZZ v AAA')
+      end
+    end
+
+    context 'when home and away teams dont exist' do
+      it 'uses the match name' do
+        expect(subject.match).to eq('match name')
+      end
+    end
+  end
+
   context 'points' do
     subject { Match.new(:result => result) }
     let(:result) { Result.new(away_team: 20) }

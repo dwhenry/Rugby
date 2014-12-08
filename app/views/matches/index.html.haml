@@ -16,7 +16,7 @@
     .name
       = match.match
     .pool
-      = match.home_team.try(:pool) || '-'
+      = match.pool || '-'
     .time
       = "#{match.kick_off.to_s.gsub(/\./,':')}0"
       = match.match_date.to_date.strftime('%d-%b-%Y')

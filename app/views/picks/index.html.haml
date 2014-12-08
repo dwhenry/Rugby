@@ -30,7 +30,7 @@
           - else
             = pick.match.match
         .pool
-          = pick.match.home_team.try(:pool) || pick.match.description
+          = pick.match.pool || pick.match.description
         .time
           = "#{pick.match.kick_off.to_s.gsub(/\./,':')}0"
           = pick.match.match_date.try(:strftime, '%d-%b-%Y')

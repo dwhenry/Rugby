@@ -9,8 +9,7 @@ end
 When /^I select a goal difference of Home by "([^"]*)"$/ do |points|
   click_on 'Picks'
   match = Match.last
-  match_name = "#{match.home_team.short_name} v #{match.away_team.short_name}"
-  within('.pick_row', :text => match_name) do
+  within('.pick_row', :text => match.match) do
     fill_in 'Home', :with => points
   end
   click_on 'Update'
@@ -19,9 +18,8 @@ end
 Then /^I have selections of Home by "([^"]*)"$/ do |points|
   click_on 'Picks'
   match = Match.last
-  match_name = "#{match.home_team.short_name} v #{match.away_team.short_name}"
-  within('.pick_row', :text => match_name) do
     page.should have_css('.pick', :text =>  "#{match.home_team.short_name} by #{points}")
+  within('.pick_row', :text => match.match) do
   end
 end
 
@@ -32,8 +30,7 @@ end
 Then /^can not select a goal difference for the match/ do
   click_on 'Picks'
   match = Match.last
-  match_name = "#{match.home_team.short_name} v #{match.away_team.short_name}"
-  within('.pick_row', :text => match_name) do
+  within('.pick_row', :text => match.match) do
     page.should have_no_css('input')
   end
   click_on 'Update'
