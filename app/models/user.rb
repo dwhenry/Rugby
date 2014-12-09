@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 
   def points
     Match.includes(:sides).all.map do |match|
-      pick = picks.find_by(match_id: match.id).try(:pick) || 0
+      pick = picks.detect{ |p| p.match_id == match.id }.try(:pick) || 0
       match.points_for_pick(pick)
     end.sum
   end

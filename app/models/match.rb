@@ -16,7 +16,7 @@ class Match < ActiveRecord::Base
   def away_team; teams.last; end
 
   def points_for_pick(pick)
-    if diff = sides.map(&:score_value).inject(:+)
+    if diff
       if pick == 0 # no pick or picked a draw so 10 point penalty
         diff.abs + 10
       elsif diff == 0 # its a draw so just the points diff
@@ -68,10 +68,13 @@ class Match < ActiveRecord::Base
         (match_date == Date.today && Time.now.utc > match_finish_time.utc))
   end
 
-  def details
-    home_side, away_side = *sides
-    return 'Pending' if home_side.score.blank?
-    "#{home_team.short_name} #{home_side.score} v #{away_team.short_name} #{away_side.score}"
+  def diff
+    @diff ||= sides.map(&:score_value).compact.inject(:+)
   end
 
+  def details
+    return 'Pending' unless sides.all?(&:score)
+    winning_side = sides.sort_by(&:score).last
+    "#{winning_side.team.try(:short_name)} by #{diff.abs}"
+  end
 end
