@@ -1,6 +1,7 @@
 class Match < ActiveRecord::Base
-  belongs_to :home_team, :class_name => 'Team'
-  belongs_to :away_team, :class_name => 'Team'
+  has_many :sides, -> { order(side: :desc) }
+  has_many :teams, through: :sides
+
   has_many :picks
   has_one :result
 
@@ -8,7 +9,12 @@ class Match < ActiveRecord::Base
   validates_presence_of :location
   validates_presence_of :name
   validates_presence_of :description
+  validates :sides, length: { in: (0..2) }
+
   default_scope { order('match_date, kick_off') }
+
+  def home_team; teams.first; end
+  def away_team; teams.last; end
 
   def points_for_pick(pick)
     if diff = result.try(:diff)
@@ -29,19 +35,23 @@ class Match < ActiveRecord::Base
   end
 
   def opponent_to(team)
-    home_team == team ? away_team : home_team
+    teams.where.not(id: team.id).first
   end
 
   def match
-    home_team ? "#{home_team.try(:short_name)} v #{away_team.try(:short_name)}" : name
+    teams.map(&:short_name).join(' v ').presence || name
   end
 
   def full_name
-    home_team ? "#{home_team.try(:name)} v #{away_team.try(:name)}" : name
+    teams.map(&:name).join(' v ').presence || name
   end
 
   def town
     location.split(',').first
+  end
+
+  def pool
+    teams.first.try(:pool)
   end
 
   def match_time

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20110924071253) do
+ActiveRecord::Schema.define(version: 20141208152359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,8 +34,6 @@ ActiveRecord::Schema.define(version: 20110924071253) do
   create_table "matches", force: true do |t|
     t.date     "match_date"
     t.float    "kick_off"
-    t.integer  "home_team_id"
-    t.integer  "away_team_id"
     t.string   "location"
     t.string   "name"
     t.string   "description"
@@ -58,6 +56,17 @@ ActiveRecord::Schema.define(version: 20110924071253) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "sides", force: true do |t|
+    t.integer  "match_id"
+    t.integer  "team_id"
+    t.string   "side"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sides", ["match_id"], name: "index_sides_on_match_id", using: :btree
+  add_index "sides", ["team_id"], name: "index_sides_on_team_id", using: :btree
 
   create_table "teams", force: true do |t|
     t.string   "name"
