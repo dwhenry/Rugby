@@ -1,43 +1,42 @@
-class Result < ActiveRecord::Base
-  attr_accessor :error_messages
-  belongs_to :match
-
+class Result < OpenStruct
   def self.get_results
-    Match.all.map do |match|
-      result = all.detect{|p| p.match == match}
-      Result.new(:match => match, :home_team => result.try(:home_team),
-                 :away_team => result.try(:away_team))
+    Match.includes(:sides).all.map do |match|
+      home_side, away_side = *match.sides
+
+      Result.new(:match => match, :home_team => home_side.try(:score),
+                 :away_team => away_side.try(:score))
     end
   end
 
   def self.add_results(added_results, user)
-    added_results.map do |added_result|
-      result = all.detect{|p| p.match_id == added_result[:match_id].to_i} ||
-        Result.new(:match_id => added_result[:match_id])
-      result.home_team = added_result[:home_team]
-      result.away_team = added_result[:away_team]
-      result.save if result.can_set?(user)
-      return_result = Result.new(:match_id => added_result[:match_id],
-                                 :home_team => added_result[:home_team],
-                                 :away_team => added_result[:away_team])
-      return_result.error_messages = result.errors.full_messages
-      return_result
-    end
-  end
+    matches = Match.includes(:sides).all
+    added_results.each do |match_id, results|
+      match = matches.detect{ |m| m.id == match_id.to_i }
 
-  def can_set?(user)
-    user.admin? && 
-      (match.match_date < Date.today ||
-      (match.match_date == Date.today && Time.now.utc > match.match_finish_time.utc))
+      if match.can_set_score?(user)
+        home_side, away_side = *match.sides
+        home_result = results['sides'].detect{|id, _| id.to_i == home_side.id }.last['score'].presence
+        away_result = results['sides'].detect{|id, _| id.to_i == away_side.id }.last['score'].presence
+
+        if home_result && away_result
+          home_side.score = home_result
+          away_side.score = away_result
+          match.save
+        elsif home_result || away_result
+          match.errors << "Must set both home and away score"
+        end
+      end
+    end
+    matches
   end
 
   def details
-    return 'Pending' if home_team.nil?
-    "#{match.home_team.short_name} #{home_team} v #{match.away_team.short_name} #{away_team}"
+    home_side, away_side = *match.sides
+    return 'Pending' if home_side.score.blank?
+    "#{home_side.team.short_name} #{home_side.score} v #{away_side.team.short_name} #{away_side.score}"
   end
 
   def diff
-    return nil unless home_team
-    home_team - away_team
+    match.sides.map(&:score_value).inject(:+)
   end
 end

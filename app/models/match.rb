@@ -1,9 +1,8 @@
 class Match < ActiveRecord::Base
-  has_many :sides, -> { order(side: :desc) }
+  has_many :sides, -> { order(side: :desc) }, autosave: true
   has_many :teams, through: :sides
 
   has_many :picks
-  has_one :result
 
   validates_presence_of :kick_off
   validates_presence_of :location
@@ -16,8 +15,12 @@ class Match < ActiveRecord::Base
   def home_team; teams.first; end
   def away_team; teams.last; end
 
+  def result
+    Result.new(match: self)
+  end
+
   def points_for_pick(pick)
-    if diff = result.try(:diff)
+    if diff = sides.map(&:score_value).inject(:+)
       if pick == 0 # no pick or picked a draw so 10 point penalty
         diff.abs + 10
       elsif diff == 0 # its a draw so just the points diff
@@ -62,4 +65,11 @@ class Match < ActiveRecord::Base
   def match_finish_time
     match_time.advance(:hours => 3)
   end
+
+  def can_set_score?(user)
+    user.admin? &&
+      (match_date < Date.today ||
+        (match_date == Date.today && Time.now.utc > match_finish_time.utc))
+  end
+
 end

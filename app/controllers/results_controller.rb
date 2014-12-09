@@ -2,11 +2,11 @@ class ResultsController < ApplicationController
   before_filter :require_user
 
   def index
-    @results = Result.get_results
+    @matches = Match.includes(:sides).all
   end
 
   def create
-    @results = Result.add_results(params[:results], current_user)
+    @matches = Result.add_results(params[:match], current_user)
     render 'index'
   end
 end
