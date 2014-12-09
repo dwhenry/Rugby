@@ -15,10 +15,6 @@ class Match < ActiveRecord::Base
   def home_team; teams.first; end
   def away_team; teams.last; end
 
-  def result
-    Result.new(match: self)
-  end
-
   def points_for_pick(pick)
     if diff = sides.map(&:score_value).inject(:+)
       if pick == 0 # no pick or picked a draw so 10 point penalty

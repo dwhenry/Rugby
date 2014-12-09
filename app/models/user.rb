@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   validates_presence_of :name
 
   def points
-    Match.all.map do |match|
+    Match.includes(:sides).all.map do |match|
       pick = picks.find_by(match_id: match.id).try(:pick) || 0
       match.points_for_pick(pick)
     end.sum
