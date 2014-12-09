@@ -72,4 +72,10 @@ class Match < ActiveRecord::Base
         (match_date == Date.today && Time.now.utc > match_finish_time.utc))
   end
 
+  def details
+    home_side, away_side = *sides
+    return 'Pending' if home_side.score.blank?
+    "#{home_team.short_name} #{home_side.score} v #{away_team.short_name} #{away_side.score}"
+  end
+
 end

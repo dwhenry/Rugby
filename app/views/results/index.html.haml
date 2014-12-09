@@ -33,7 +33,7 @@
           = "#{match.kick_off.to_s.gsub(/\./,':')}0"
           = match.match_date.try(:strftime, '%d-%b-%Y')
         .result
-          = match.result.details
+          = match.details
         - if match.errors.any?
           .errors
             = match.errors.full_messages.join('<br>')

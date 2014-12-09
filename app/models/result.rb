@@ -29,14 +29,4 @@ class Result < OpenStruct
     end
     matches
   end
-
-  def details
-    home_side, away_side = *match.sides
-    return 'Pending' if home_side.score.blank?
-    "#{home_side.team.short_name} #{home_side.score} v #{away_side.team.short_name} #{away_side.score}"
-  end
-
-  def diff
-    match.sides.map(&:score_value).inject(:+)
-  end
 end
