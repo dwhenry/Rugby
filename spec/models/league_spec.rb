@@ -6,7 +6,7 @@ describe League do
   context "adding a users to a league" do
     let(:user) { User.new }
     it "adds the user" do
-      expect(subject.league_members).to receive(:create).with(user: user, password: nil)
+      expect(subject.players).to receive(:create).with(user: user, password: nil)
       subject.add_user(user, nil)
     end
   end

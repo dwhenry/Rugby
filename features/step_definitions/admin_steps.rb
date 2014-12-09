@@ -9,7 +9,7 @@ end
 Then /^can see updated points$/ do
   click_on 'Results'
   match = Match.last
-  text = "#{match.home_team.short_name} 5 v #{match.away_team.short_name} 10"
+  text = "#{match.away_team.short_name} by 5"
   page.should have_css('.result', :text => text)
 end
 

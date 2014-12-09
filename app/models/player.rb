@@ -1,4 +1,4 @@
-class LeagueMember < ActiveRecord::Base
+class Player < ActiveRecord::Base
   attr_accessor :password
 
   belongs_to :user

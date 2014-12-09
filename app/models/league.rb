@@ -1,7 +1,7 @@
 class League < ActiveRecord::Base
   attr_accessor :password_confirmation
-  has_many :league_members
-  has_many :users, :through => :league_members
+  has_many :players
+  has_many :users, through: :players
 
   validates_presence_of :name
   validate :confirm_password
@@ -11,8 +11,8 @@ class League < ActiveRecord::Base
     !password.blank?
   end
 
-  def get_member(user)
-    league_members.detect{|lm| lm.user == user}
+  def get_player(user)
+    players.detect{ |p| p.user == user}
   end
 
   def has_member?(user)
@@ -24,7 +24,7 @@ class League < ActiveRecord::Base
   end
 
   def add_user(user, password)
-    self.league_members.create(:user => user, :password => password)
+    players.create(user: user, password: password)
   end
 
   def confirm_password

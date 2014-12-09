@@ -1,6 +1,6 @@
 Rugby::Application.routes.draw do
   resources :leagues
-  resources :league_members, :only => [:create, :destroy, :new]
+  resources :players, :only => [:create, :destroy, :new]
 
   get "main/index"
 
