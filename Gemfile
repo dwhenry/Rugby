@@ -17,9 +17,10 @@ gem 'coffee-rails', '~> 4.0.0.rc1'
 gem 'uglifier', '>= 1.3.0'
 
 group :test, :development do
-  gem "rspec"
-  gem "rspec-rails"
-  gem "factory_girl"
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'factory_girl'
+  gem 'factory_girl_rails'
   gem 'cucumber-rails', require: false
   gem 'capybara'
   gem 'database_cleaner'

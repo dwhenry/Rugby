@@ -3,8 +3,8 @@ class User < ActiveRecord::Base
     #c.my_config_option = my_value
   end
 
-  has_many :league_members
-  has_many :leagues, :through => :league_members
+  has_many :players
+  has_many :leagues, :through => :players
   has_many :picks
   belongs_to :team
   after_create :add_to_all_user_league

@@ -1,8 +1,8 @@
 .header
   Join League:
-  = @league_member.league.name
+  = @player.league.name
 
-= form_for @league_member do |form|
+= form_for @player do |form|
   = form.hidden_field :league_id
   = form.hidden_field :user_id
   .input_row
