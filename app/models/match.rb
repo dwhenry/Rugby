@@ -34,7 +34,7 @@ class Match < ActiveRecord::Base
   end
 
   def opponent_to(team)
-    teams.where.not(id: team.id).first
+    teams.detect { |t| t != team }
   end
 
   def match
