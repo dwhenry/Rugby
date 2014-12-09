@@ -6,10 +6,10 @@
         = "Go #{team.name}"
       .element
         = image_tag "flags/#{team.name}.png"
-      - team.matches.each do |match|
+      - team.matches.includes(:sides, :teams).each do |match|
         .element
           = "v #{match.opponent_to(team).name}"
-          - if match.result.try(:home_team)
+          - if match.sides.first.score
             = "(#{match.result.details})"
     - else
       Please Select Team

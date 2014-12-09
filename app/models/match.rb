@@ -1,9 +1,8 @@
 class Match < ActiveRecord::Base
-  has_many :sides, -> { order(side: :desc) }
+  has_many :sides, -> { order(side: :desc) }, autosave: true
   has_many :teams, through: :sides
 
   has_many :picks
-  has_one :result
 
   validates_presence_of :kick_off
   validates_presence_of :location
@@ -17,7 +16,7 @@ class Match < ActiveRecord::Base
   def away_team; teams.last; end
 
   def points_for_pick(pick)
-    if diff = result.try(:diff)
+    if diff
       if pick == 0 # no pick or picked a draw so 10 point penalty
         diff.abs + 10
       elsif diff == 0 # its a draw so just the points diff
@@ -35,7 +34,7 @@ class Match < ActiveRecord::Base
   end
 
   def opponent_to(team)
-    teams.where.not(id: team.id).first
+    teams.detect { |t| t != team }
   end
 
   def match
@@ -61,5 +60,21 @@ class Match < ActiveRecord::Base
 
   def match_finish_time
     match_time.advance(:hours => 3)
+  end
+
+  def can_set_score?(user)
+    user.admin? &&
+      (match_date < Date.today ||
+        (match_date == Date.today && Time.now.utc > match_finish_time.utc))
+  end
+
+  def diff
+    @diff ||= sides.map(&:score_value).compact.inject(:+)
+  end
+
+  def details
+    return 'Pending' unless sides.all?(&:score)
+    winning_side = sides.sort_by(&:score).last
+    "#{winning_side.team.try(:short_name)} by #{diff.abs}"
   end
 end
