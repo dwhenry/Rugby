@@ -2,6 +2,7 @@ class Pick < ActiveRecord::Base
   attr_accessor :error_messages
   belongs_to :match
   belongs_to :user
+  belongs_to :team
 
   validate :valid_pick
   validate :can_be_picked
@@ -9,24 +10,23 @@ class Pick < ActiveRecord::Base
   validates_presence_of :user_id
   validates_uniqueness_of :match_id, :scope => :user_id
 
+  def pick
+    return 0 unless team
+    team == match.sides.first.team ? margin : -margin
+  end
+
+
   def home_team
-    return @home_team if @updated
-    @home_team ||= (pick && pick > 0 ? pick : nil)
+    team == match.sides.first.team ? margin : nil
   end
 
   def away_team
-    return @away_team if @updated
-    @away_team ||= (pick && pick < 0 ? pick.abs : nil)
+    team == match.sides.first.team ? nil : margin
   end
 
-  def home_team=(val)
-    @updated = true
-    @home_team = (val.blank? ? nil : val.to_i)
-  end
-
-  def away_team=(val)
-    @updated = true
-    @away_team = (val.blank? ? nil : val.to_i)
+  def set(team, margin)
+    self.team = team
+    self.margin = margin.try(:to_i)
   end
 
   def can_set?
@@ -53,7 +53,7 @@ class Pick < ActiveRecord::Base
 
   private
   def results_details
-    points = match.points_for_pick(pick || 0)
+    # points = match.points_for_pick(pick || 0)
     average = User.all.inject(0.0) do |points, user|
       pick = match.picks.find_by(user_id: user.id).try(:pick) || 0
       points + match.points_for_pick(pick || 0)
@@ -65,15 +65,6 @@ class Pick < ActiveRecord::Base
     errors.add(:base, 'Pick must be positive') if home_team && home_team < 0
     errors.add(:base, 'Pick must be positive') if away_team && away_team < 0
     errors.add(:base, 'Only enter points for the winning side') if away_team && home_team
-    if errors.empty?
-      if away_team
-        self.pick = -1 * away_team
-      elsif home_team
-        self.pick = home_team
-      else
-        self.pick = 0
-      end
-    end
   end
 
   def can_be_picked

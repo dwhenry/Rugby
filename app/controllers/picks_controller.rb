@@ -6,7 +6,7 @@ class PicksController < ApplicationController
   end
 
   def create
-    @picks = current_user.add_picks(params[:picks])
-    render 'index'
+    current_user.add_picks(params[:picks])
+    redirect_to picks_path
   end
 end
