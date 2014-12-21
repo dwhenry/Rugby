@@ -9,16 +9,13 @@ module Result
 
       if match.can_set_score?(user)
         home_side, away_side = *match.sides
-        home_result = results['sides'].detect{|id, _| id.to_i == home_side.id }.last['score'].presence
-        away_result = results['sides'].detect{|id, _| id.to_i == away_side.id }.last['score'].presence
 
-        if home_result && away_result
-          home_side.score = home_result
-          away_side.score = away_result
+        home_side.score = results['sides'][home_side.id.to_s]['score'].presence
+        away_side.score = results['sides'][away_side.id.to_s]['score'].presence
+
+        if home_side.score && away_side.score
           match.save
-        elsif home_result || away_result
-          home_side.score = home_result
-          away_side.score = away_result
+        elsif home_side.score || away_side.score
           match.errors[:base] << "Must set both home and away score"
         end
       end
