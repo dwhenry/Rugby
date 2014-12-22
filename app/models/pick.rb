@@ -24,9 +24,9 @@ class Pick < ActiveRecord::Base
     team == match.sides.first.team ? nil : margin
   end
 
-  def set(team, margin)
-    self.team = team
-    self.margin = margin.try(:to_i)
+  def set(team_id, margin)
+    self.team_id = team_id
+    self.margin = margin.to_i
   end
 
   def can_set?

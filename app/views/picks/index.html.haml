@@ -15,15 +15,18 @@
 
   - @picks.each do |pick|
     = fields_for "picks[]", pick do |p|
-      = p.hidden_field :match_id
       .pick_row
         .name{:title => pick.match.full_name}
           - if pick.can_set?
-            = p.label :home_team, 'Home', :style => 'display: none;'
-            = p.text_field :home_team, {:class => 'home_team', :onchange => 'clear_other(this)'}
+            = p.hidden_field :match_id
+
+            = p.radio_button :team_id, pick.match.sides[0].team_id
+            = p.text_field :margin, {:class => 'home_team'}
+
             = pick.match.match
-            = p.label :away_team, 'Away', :style => 'display: none;'
-            = p.text_field :away_team, {:class => 'away_team', :onchange => 'clear_other(this)'}
+
+            = p.radio_button :team_id, pick.match.sides[1].team_id
+            = p.text_field :margin, {:class => 'home_team'}
           - elsif pick.match.match_date <= Date.today
             = pick.match.match
             = "(#{pick.description_with(pick.pick)})"

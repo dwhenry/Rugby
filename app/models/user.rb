@@ -37,14 +37,13 @@ class User < ActiveRecord::Base
 
   def add_picks(added_picks)
     picks_by_match_id = picks.group_by(&:match_id)
-    added_picks.map do |added_pick|
+    added_picks.each do |_, added_pick|
+      next unless pick.can_set?
       pick = picks_by_match_id[added_pick[:match_id].to_i].try(:first) ||
         Pick.new(:match_id => added_pick[:match_id], :user => self)
 
-      home, away = *pick.match.sides
-      pick.set(home.team, added_pick[:home_team]) if added_pick[:home_team].present?
-      pick.set(away.team, added_pick[:away_team]) if added_pick[:away_team].present?
-      pick.save if pick.can_set?
+      pick.set(added_pick[:team_id], added_pick[:margin]) if added_pick[:margin].present?
+      pick.save
     end
   end
 end
